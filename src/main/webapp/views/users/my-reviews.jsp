@@ -70,7 +70,7 @@
                                 <c:forEach begin="1" end="${review.rating}"><i class="fa fa-star"></i></c:forEach>
                                 <c:forEach begin="${review.rating + 1}" end="5"><i class="fa fa-star-o"></i></c:forEach>
                             </div>
-                            <div class="package-name">${review.tripPackage.title}</div>
+                            <div class="package-name">${review.trip.title}</div>
                             <div class="review-date">${review.createdAt}</div>
                             <div class="review-text">${review.reviewText}</div>
                         </div>

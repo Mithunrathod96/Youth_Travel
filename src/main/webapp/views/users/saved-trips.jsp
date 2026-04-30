@@ -67,11 +67,11 @@
                         <div class="package-grid">
                             <c:forEach var="saved" items="${savedPackages}">
                                 <div class="package-card">
-                                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" class="package-img">
+                                    <img src="${not empty saved.trip.imageUrl ? saved.trip.imageUrl : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80'}" class="package-img">
                                     <div class="package-content">
-                                        <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 5px;"><i class="fa fa-map-marker"></i> ${saved.tripPackage.destination}</div>
-                                        <div class="package-title">${saved.tripPackage.title}</div>
-                                        <div class="package-price">₹${saved.tripPackage.price}</div>
+                                        <div style="font-size: 12px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 5px;"><i class="fa fa-map-marker"></i> ${saved.trip.destination}</div>
+                                        <div class="package-title"><a href="<c:url value='/user/package/${saved.trip.id}'/>" style="color: inherit; text-decoration: none;">${saved.trip.title}</a></div>
+                                        <div class="package-price">₹${saved.trip.price}</div>
                                     </div>
                                 </div>
                             </c:forEach>

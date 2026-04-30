@@ -11,6 +11,9 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Transient
+    private boolean soldOut = false;
+
     @Column(nullable = false)
     private String title;
 
@@ -199,6 +202,14 @@ public class Trip {
     }
 
     // Getters and Setters
+    public boolean isSoldOut() {
+        return soldOut;
+    }
+
+    public void setSoldOut(boolean soldOut) {
+        this.soldOut = soldOut;
+    }
+
     public Long getId() {
         return id;
     }

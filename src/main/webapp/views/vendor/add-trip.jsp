@@ -714,20 +714,20 @@
                                         class="p-4 border-2 border-dashed border-secondary rounded text-center cursor-pointer mb-2"
                                         style="border: 2px dashed rgba(240, 76, 38, 0.3); background: rgba(240, 76, 38, 0.05);">
                                         <i class="fa fa-picture-o fa-2x text-orange mb-2"></i>
-                                        <div class="small">Click to Upload (Max 10)</div>
+                                        <div class="small">Upload Photos (Multiple)</div>
                                         <input type="file" id="photoFiles" name="photoFiles" accept="image/*" multiple
                                             class="d-none" onchange="previewMedia(this, 'photoPreview')">
                                     </div>
                                     <div id="photoPreview" class="d-flex flex-wrap gap-2"></div>
                                 </div>
                                 <div class="col-md-6">
-                                    <label>Add Video Clip (Optional)</label>
+                                    <label>Add Video Clips</label>
                                     <div onclick="document.getElementById('videoFiles').click()"
                                         class="p-4 border-2 border-dashed border-secondary rounded text-center cursor-pointer mb-2"
                                         style="border: 2px dashed rgba(59, 130, 246, 0.3); background: rgba(59, 130, 246, 0.05);">
                                         <i class="fa fa-video-camera fa-2x text-primary mb-2"></i>
-                                        <div class="small">Upload Highlights</div>
-                                        <input type="file" id="videoFiles" name="videoFiles" accept="video/*"
+                                        <div class="small">Upload Highlights (Multiple)</div>
+                                        <input type="file" id="videoFiles" name="videoFiles" accept="video/*" multiple
                                             class="d-none" onchange="previewMedia(this, 'videoPreview')">
                                     </div>
                                     <div id="videoPreview" class="d-flex flex-wrap gap-2"></div>
@@ -817,7 +817,8 @@
 
                         <!-- STEP 3: SCHEDULING & LOGISTICS -->
                         <div class="form-step" id="step3">
-                            <div class="section-title"><span class="badge">05</span> AVAILABILITY WINDOW</div>
+                            <div class="section-title mt-4"><span class="badge">05</span> AVAILABILITY WINDOW <span class="text-danger">*</span></div>
+                            <p class="small text-white-50 mb-3">Choose how you want to schedule this trip. One mode is required.</p>
                             <div class="d-flex gap-2 mb-4">
                                 <div class="pricing-toggle active w-100 text-center"
                                     onclick="setScheduleMode('specific', this)"><i class="fa fa-calendar"></i> Specific
@@ -1163,7 +1164,43 @@
 
                 function validateStep() {
                     const activeStep = document.getElementsByClassName("form-step")[currentStep];
-                    const inputs = activeStep.querySelectorAll("input[required]");
+                    
+                    // Specific validation for Availability Window (Step 3, Index 2)
+                    if (currentStep === 2) {
+                        const mode = document.getElementById('scheduleModeInput').value;
+                        if (mode === 'specific') {
+                            const occCards = document.querySelectorAll('.occ-card');
+                            if (occCards.length === 0) {
+                                alert('Please add at least one departure date in "Specific Dates" mode.');
+                                return false;
+                            }
+                            // Validate that all added dates have a value
+                            const dateInputs = document.querySelectorAll('.occ-date');
+                            for(let d of dateInputs) {
+                                if(!d.value) {
+                                    d.classList.add("is-invalid");
+                                    alert("Please fill in all departure dates.");
+                                    return false;
+                                }
+                                d.classList.remove("is-invalid");
+                            }
+                        } else if (mode === 'recurring') {
+                            const recurringDays = document.querySelectorAll('input[name="recurringDays"]:checked');
+                            if (recurringDays.length === 0) {
+                                alert('Please select at least one departure day for "Weekly Recurring" mode.');
+                                return false;
+                            }
+                            const endDate = document.getElementById('recEndDate');
+                            if (!endDate.value) {
+                                endDate.classList.add("is-invalid");
+                                alert('Please select a "Valid Until" date for recurring schedules.');
+                                return false;
+                            }
+                            endDate.classList.remove("is-invalid");
+                        }
+                    }
+
+                    const inputs = activeStep.querySelectorAll("input[required], select[required], textarea[required]");
                     for (let input of inputs) {
                         if (!input.value) {
                             input.classList.add("is-invalid");
@@ -1402,8 +1439,17 @@
                 function setScheduleMode(m, el) {
                     $('.pricing-toggle').removeClass('active'); $(el).addClass('active');
                     $('#scheduleModeInput').val(m);
-                    if (m === 'recurring') { $('#recurringCont').show(); $('#specificDatesCont').hide(); }
-                    else { $('#recurringCont').hide(); $('#specificDatesCont').show(); }
+                    if (m === 'recurring') { 
+                        $('#recurringCont').show(); 
+                        $('#specificDatesCont').hide();
+                        // Remove required from specific dates to avoid conflicts
+                        $('.occ-date').prop('required', false);
+                    } else { 
+                        $('#recurringCont').hide(); 
+                        $('#specificDatesCont').show();
+                        // Ensure added specific dates are required
+                        $('.occ-date').prop('required', true);
+                    }
                 }
                 function addOccurrence() {
                     const today = new Date().toISOString().split('T')[0];

@@ -54,11 +54,11 @@
         .package-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
         .package-card { background: var(--dark-card); border-radius: 15px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); transition: var(--transition); position: relative; }
         .package-card:hover { transform: translateY(-10px); border-color: var(--primary-blue); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .package-img-wrapper { position: relative; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: #000; }
-        .package-img, .package-video { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: opacity 0.5s ease, transform 0.5s ease; position: absolute; top: 0; left: 0; }
+        .package-img-wrapper { position: relative; width: 100%; aspect-ratio: 16 / 10; overflow: hidden; background: transparent; }
+        .package-img, .package-video { width: 100%; height: 100%; object-fit: cover; object-position: center; transition: opacity 0.4s ease, transform 0.4s ease; position: absolute; top: 0; left: 0; }
         .package-video { opacity: 0; pointer-events: none; }
-        .package-card:hover .package-img { opacity: 0; transform: scale(1.1); }
-        .package-card:hover .package-video { opacity: 1; transform: scale(1.1); }
+        .package-card:hover .package-img { opacity: 1 !important; transform: scale(1.1) translateY(-10px) !important; }
+        .package-card:hover .package-video { opacity: 1 !important; transform: scale(1.1) !important; }
         
         .play-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 40px; opacity: 0.6; z-index: 2; pointer-events: none; display: none; }
         .has-video .play-overlay { display: block; }
@@ -71,6 +71,12 @@
         .btn-view { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 8px; font-size: 13px; font-weight: 600; transition: var(--transition); }
         .package-card:hover .btn-view { background: var(--primary-blue); border-color: var(--primary-blue); }
         .empty-state { text-align: center; padding: 80px 20px; background: var(--dark-card); border-radius: 20px; border: 1px dotted rgba(255,255,255,0.1); }
+
+        /* Sold Out Styles */
+        .package-card.sold-out { opacity: 0.6; filter: grayscale(0.8); cursor: not-allowed; }
+        .package-card.sold-out:hover { transform: none; box-shadow: none; border-color: rgba(255,255,255,0.05); }
+        .sold-out-badge { position: absolute; top: 15px; left: 15px; background: #e11d48; color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 800; text-transform: uppercase; z-index: 10; box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3); }
+        .sold-out .btn-view { display: none; }
 
 
                 .sidebar {
@@ -702,12 +708,15 @@
                                                 </c:if>
                                             </c:forEach>
 
-                                            <div class="package-card ${hasVideo ? 'has-video' : ''}"
-                                                onmouseenter="playVideo(this)" onmouseleave="pauseVideo(this)">
+                                            <div class="package-card ${hasVideo ? 'has-video' : ''} ${trip.soldOut ? 'sold-out' : ''}"
+                                                onmouseenter="${!trip.soldOut ? 'playVideo(this)' : ''}" onmouseleave="${!trip.soldOut ? 'pauseVideo(this)' : ''}">
                                                 <div class="package-img-wrapper">
+                                                    <c:if test="${trip.soldOut}">
+                                                        <span class="sold-out-badge">Sold Out</span>
+                                                    </c:if>
                                                     <img src="${not empty trip.imageUrl ? trip.imageUrl : 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80'}"
                                                         class="package-img" loading="lazy">
-                                                    <c:if test="${hasVideo}">
+                                                    <c:if test="${hasVideo && !trip.soldOut}">
                                                         <video class="package-video" muted loop playsinline
                                                             preload="none">
                                                             <source src="${videoUrl}" type="video/mp4">

@@ -36,6 +36,8 @@ public class Booking {
     @Column(columnDefinition = "LONGTEXT")
     private String guestDetails; // Stores guest info in JSON or structured string
 
+    private boolean reviewed = false;
+
     @PrePersist
     protected void onCreate() {
         bookingDate = LocalDateTime.now();
@@ -147,5 +149,13 @@ public class Booking {
 
     public void setGuestDetails(String guestDetails) {
         this.guestDetails = guestDetails;
+    }
+
+    public boolean isReviewed() {
+        return reviewed;
+    }
+
+    public void setReviewed(boolean reviewed) {
+        this.reviewed = reviewed;
     }
 }

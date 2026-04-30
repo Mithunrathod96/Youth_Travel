@@ -17,7 +17,11 @@ public class SavedPackage {
 
     @ManyToOne
     @JoinColumn(name = "trip_id", nullable = false)
-    private Trip tripPackage;
+    private Trip trip;
+
+    // Safe Fix: Satisfy the redundant 'package_id' column if it still exists in the DB
+    @Column(name = "package_id", nullable = true)
+    private Long packageId;
 
     @Column(name = "saved_at")
     private LocalDateTime savedAt;
@@ -25,13 +29,16 @@ public class SavedPackage {
     @PrePersist
     protected void onCreate() {
         savedAt = LocalDateTime.now();
+        if (trip != null) {
+            this.packageId = trip.getId();
+        }
     }
 
     public SavedPackage() {}
 
-    public SavedPackage(User user, Trip tripPackage) {
+    public SavedPackage(User user, Trip trip) {
         this.user = user;
-        this.tripPackage = tripPackage;
+        this.trip = trip;
     }
 
     public Long getId() {
@@ -50,12 +57,12 @@ public class SavedPackage {
         this.user = user;
     }
 
-    public Trip getTripPackage() {
-        return tripPackage;
+    public Trip getTrip() {
+        return trip;
     }
 
-    public void setTripPackage(Trip tripPackage) {
-        this.tripPackage = tripPackage;
+    public void setTrip(Trip trip) {
+        this.trip = trip;
     }
 
     public LocalDateTime getSavedAt() {

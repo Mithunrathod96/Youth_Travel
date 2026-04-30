@@ -25,7 +25,7 @@ public class SavedPackageService {
     public void removeSavedTrip(com.youthtravel.entity.User user, com.youthtravel.entity.Trip trip) {
         List<SavedPackage> saved = savedPackageRepository.findByUser(user);
         for (SavedPackage sp : saved) {
-            if (sp.getTripPackage().getId().equals(trip.getId())) {
+            if (sp.getTrip().getId().equals(trip.getId())) {
                 savedPackageRepository.delete(sp);
                 break;
             }
@@ -35,7 +35,7 @@ public class SavedPackageService {
     public boolean isTripSaved(com.youthtravel.entity.User user, com.youthtravel.entity.Trip trip) {
         List<SavedPackage> saved = savedPackageRepository.findByUser(user);
         for (SavedPackage sp : saved) {
-            if (sp.getTripPackage().getId().equals(trip.getId())) {
+            if (sp.getTrip().getId().equals(trip.getId())) {
                 return true;
             }
         }

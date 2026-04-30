@@ -90,7 +90,7 @@
                                                 <a href="<c:url value='/user/booking/${booking.id}/chat'/>" class="btn btn-sm" style="border-radius: 8px; background: var(--primary-blue); color: #fff; border: none;">
                                                     <i class="fa fa-comments"></i> Chat
                                                 </a>
-                                                <c:if test="${booking.status == 'Completed'}">
+                                                <c:if test="${booking.status == 'Completed' && !booking.reviewed}">
                                                     <a href="<c:url value='/user/booking/${booking.id}/review'/>" class="btn btn-sm" style="border-radius: 8px; background: #f59e0b; color: #fff; border: none;">
                                                         <i class="fa fa-star"></i> Review
                                                     </a>

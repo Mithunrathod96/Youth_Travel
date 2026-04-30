@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -255,9 +256,67 @@
         <a href="<c:url value='/user/dashboard'/>" class="btn-back"><i class="fa fa-arrow-left"></i> Back to Dashboard</a>
     </div>
 
-    <!-- Hero Banner -->
+    <!-- Hero Banner Carousel -->
     <div class="hero-banner">
-        <img src="${not empty trip.imageUrl ? trip.imageUrl : 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'}" alt="Trip Banner" class="hero-bg">
+        <div id="tripCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators" style="bottom: 80px; z-index: 20;">
+                <button type="button" data-bs-target="#tripCarousel" data-bs-slide-to="0" class="active"></button>
+                <button type="button" data-bs-target="#tripCarousel" data-bs-slide-to="1"></button>
+                <button type="button" data-bs-target="#tripCarousel" data-bs-slide-to="2"></button>
+                <button type="button" data-bs-target="#tripCarousel" data-bs-slide-to="3"></button>
+            </div>
+
+            <div class="carousel-inner" style="height: 60vh;">
+                <!-- Main Image (Always First) -->
+                <div class="carousel-item active" style="height: 60vh;">
+                    <img src="${not empty trip.imageUrl ? trip.imageUrl : 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1920&q=80'}" class="d-block w-100 hero-bg" alt="Main Image">
+                </div>
+
+                <c:choose>
+                    <c:when test="${not empty gallery && fn:length(gallery) > 1}">
+                        <c:forEach var="url" items="${gallery}" varStatus="status">
+                            <c:if test="${!status.first && status.index < 4}">
+                                <div class="carousel-item" style="height: 60vh;">
+                                    <img src="${url}" class="d-block w-100 hero-bg" alt="Gallery Image">
+                                </div>
+                            </c:if>
+                        </c:forEach>
+                        <!-- If gallery had less than 4, add fallbacks to reach 4 -->
+                        <c:if test="${fn:length(gallery) < 4}">
+                            <c:forEach begin="${fn:length(gallery)}" end="3" var="i">
+                                <div class="carousel-item" style="height: 60vh;">
+                                    <c:choose>
+                                        <c:when test="${i == 1}"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80" class="d-block w-100 hero-bg" alt="Fallback 1"></c:when>
+                                        <c:when test="${i == 2}"><img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1920&q=80" class="d-block w-100 hero-bg" alt="Fallback 2"></c:when>
+                                        <c:otherwise><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80" class="d-block w-100 hero-bg" alt="Fallback 3"></c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </c:forEach>
+                        </c:if>
+                    </c:when>
+                    <c:otherwise>
+                        <!-- Pure Fallbacks -->
+                        <div class="carousel-item" style="height: 60vh;">
+                            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80" class="d-block w-100 hero-bg" alt="Gallery 1">
+                        </div>
+                        <div class="carousel-item" style="height: 60vh;">
+                            <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=1920&q=80" class="d-block w-100 hero-bg" alt="Gallery 2">
+                        </div>
+                        <div class="carousel-item" style="height: 60vh;">
+                            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1920&q=80" class="d-block w-100 hero-bg" alt="Gallery 3">
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#tripCarousel" data-bs-slide="prev" style="z-index: 30; width: 10%;">
+                <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 20px;"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#tripCarousel" data-bs-slide="next" style="z-index: 30; width: 10%;">
+                <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%; padding: 20px;"></span>
+            </button>
+        </div>
+        
         <div class="hero-content">
             <h1 class="hero-title">${trip.title}</h1>
             <div class="hero-meta">
@@ -318,13 +377,25 @@
                 <div>
                     <h2 class="section-title"><i class="fa fa-check-circle" style="color: #28a745;"></i> What's Included</h2>
                     <div style="color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 15px; white-space: pre-line;">
-                        ${not empty trip.inclusions ? trip.inclusions : '✓ Transportation\n✓ Accommodation\n✓ Selected Meals\n✓ Guide/Trek Leader\n✓ First Aid'}
+                        <c:choose>
+                            <c:when test="${not empty trip.inclusions}">${trip.inclusions}</c:when>
+                            <c:otherwise>✓ Transportation
+✓ Accommodation
+✓ Selected Meals
+✓ Guide/Trek Leader
+✓ First Aid</c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
                 <div>
                     <h2 class="section-title"><i class="fa fa-times-circle" style="color: #dc3545;"></i> What's Excluded</h2>
                     <div style="color: rgba(255,255,255,0.7); line-height: 1.8; font-size: 15px; white-space: pre-line;">
-                        ${not empty trip.exclusions ? trip.exclusions : '✗ Personal Expenses\n✗ Optional Activities\n✗ Anything not mentioned in inclusions'}
+                        <c:choose>
+                            <c:when test="${not empty trip.exclusions}">${trip.exclusions}</c:when>
+                            <c:otherwise>✗ Personal Expenses
+✗ Optional Activities
+✗ Anything not mentioned in inclusions</c:otherwise>
+                        </c:choose>
                     </div>
                 </div>
             </div>
@@ -353,15 +424,16 @@
             <div class="booking-widget">
                 <div class="price-display">₹<fmt:formatNumber value="${trip.price}" pattern="#,##0"/> <span>/ person</span></div>
                 
-                <form action="<c:url value='/user/booking/create'/>" method="POST">
+                <form action="<c:url value='/user/booking/submit'/>" method="POST">
                     <input type="hidden" name="tripId" value="${trip.id}">
+                    <input type="hidden" name="tripType" value="${not empty trip.category ? trip.category : 'Standard'}">
+                    <input type="hidden" name="guestDetails" value="N/A">
                     
                     <label class="form-label">Select Date & Schedule</label>
-                    <select name="scheduleId" class="custom-select" required>
+                    <select name="selectedDate" class="custom-select" required>
                         <option value="" disabled selected>Choose an available date...</option>
                         <c:forEach var="schedule" items="${schedules}">
-                            <!-- Only show future dates logic could be here, but showing all for demo -->
-                            <option value="${schedule.id}">
+                            <option value="${schedule.startDate} to ${schedule.endDate}">
                                 ${schedule.startDate} to ${schedule.endDate} 
                                 (${schedule.availableSeats} seats left)
                             </option>
@@ -380,9 +452,12 @@
                         <option value="5">5+ Travelers</option>
                     </select>
 
-                    <button type="submit" class="btn-book" ${empty schedules ? 'disabled style="background:gray;"' : ''}>
-                        ${empty schedules ? 'Sold Out' : 'Book Now'}
+                    <button type="submit" class="btn-book" ${trip.soldOut ? 'disabled style="background:gray;"' : ''}>
+                        ${trip.soldOut ? 'Sold Out' : 'Book Now'}
                     </button>
+                    <a href="<c:url value='/user/save-trip/${trip.id}'/>" class="btn-save" style="display: block; text-align: center; margin-top: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #fff; padding: 15px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: 0.3s;">
+                        <i class="fa fa-heart-o"></i> Save to Wishlist
+                    </a>
                     
                     <div style="text-align: center; margin-top: 15px; font-size: 13px; color: var(--text-muted);">
                         <i class="fa fa-shield"></i> Secure Booking • Instant Confirmation
@@ -402,15 +477,15 @@
 
     </div>
 
-    <!-- JS to parse Itinerary if it exists -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const rawEl = document.getElementById("raw-itinerary");
             if (rawEl) {
+                const rawContent = rawEl.textContent.trim();
                 try {
-                    const data = JSON.parse(rawEl.innerText);
+                    const data = JSON.parse(rawContent);
                     const timeline = document.getElementById("itinerary-timeline");
-                    if (data && data.length > 0) {
+                    if (data && Array.isArray(data) && data.length > 0) {
                         timeline.innerHTML = '';
                         data.forEach((day, index) => {
                             const node = document.createElement("div");
@@ -423,8 +498,21 @@
                         });
                     }
                 } catch(e) {
-                    console.error("Failed to parse itinerary JSON", e);
+                    console.error("Failed to parse itinerary JSON. Raw content:", rawContent);
+                    console.error("Error details:", e);
                 }
+            }
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var myCarousel = document.querySelector('#tripCarousel');
+            if (myCarousel) {
+                new bootstrap.Carousel(myCarousel, {
+                    interval: 3000,
+                    ride: 'carousel'
+                });
             }
         });
     </script>

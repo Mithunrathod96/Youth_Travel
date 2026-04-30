@@ -294,6 +294,11 @@ public class UserController {
         // Fetch all trips
         List<Trip> allTrips = tripService.getAllTrips();
 
+        // Calculate soldOut status for each trip
+        for (Trip trip : allTrips) {
+            calculateTripAvailability(trip);
+        }
+
         // Apply Filters
         List<Trip> filteredTrips = allTrips.stream()
                 .filter(t -> t != null && "Active".equalsIgnoreCase(t.getStatus()))
@@ -412,6 +417,31 @@ public class UserController {
         return "/users/user-dashboard";
     }
 
+    private void calculateTripAvailability(Trip trip) {
+        // Check schedules first
+        List<com.youthtravel.entity.TripSchedule> schedules = tripScheduleRepository.findByTrip(trip);
+        boolean hasAvailableSchedule = false;
+        for (com.youthtravel.entity.TripSchedule s : schedules) {
+            if (s.getAvailableSeats() != null && s.getAvailableSeats() > 0 && "Active".equals(s.getStatus())) {
+                hasAvailableSchedule = true;
+                break;
+            }
+        }
+        
+        // If it has schedules, sold out depends on those schedules
+        if (!schedules.isEmpty()) {
+            trip.setSoldOut(!hasAvailableSchedule);
+        } else {
+            // Fallback to maxTravelers logic if no schedules exist
+            int occupied = bookingService.getOccupiedSlotsByTrip(trip);
+            if (trip.getMaxTravelers() != null && trip.getMaxTravelers() > 0) {
+                trip.setSoldOut(occupied >= trip.getMaxTravelers());
+            } else {
+                trip.setSoldOut(false); // Assume available if no limit and no schedules
+            }
+        }
+    }
+
     @GetMapping("/package/{id}")
     public String showPackageDetails(@PathVariable Long id, HttpSession session, Model model) {
         User user = (User) session.getAttribute("user");
@@ -422,6 +452,7 @@ public class UserController {
         Optional<Trip> tripOpt = tripService.getTripById(id);
         if (tripOpt.isPresent()) {
             Trip trip = tripOpt.get();
+            calculateTripAvailability(trip);
             // Only show Active packages
             if (!"Active".equalsIgnoreCase(trip.getStatus())) {
                 return "redirect:/user/dashboard";
@@ -512,9 +543,25 @@ public class UserController {
             booking.setStatus("Pending");
 
             bookingService.saveBooking(booking);
-            redirectAttributes.addFlashAttribute("message",
-                    "Booking submitted successfully! Redirecting to payment...");
-            return "redirect:/user/my-bookings";
+            return "redirect:/user/payment/" + booking.getId();
+        }
+        return "redirect:/user/dashboard";
+    }
+
+    @GetMapping("/payment/{id}")
+    public String showPaymentPage(@PathVariable Long id, HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) return "redirect:/user/login";
+
+        Optional<Booking> bookingOpt = bookingService.getBookingById(id);
+        if (bookingOpt.isPresent()) {
+            Booking booking = bookingOpt.get();
+            if (!booking.getCustomerEmail().equals(user.getEmail())) {
+                return "redirect:/user/dashboard";
+            }
+            model.addAttribute("booking", booking);
+            model.addAttribute("user", user);
+            return "/users/payment";
         }
         return "redirect:/user/dashboard";
     }
@@ -581,6 +628,25 @@ public class UserController {
         model.addAttribute("user", user);
         model.addAttribute("bookings", bookingService.getBookingsByUserEmail(user.getEmail()));
         return "/users/my-bookings";
+    }
+
+    @GetMapping("/save-trip/{id}")
+    public String saveTrip(@PathVariable Long id, HttpSession session, RedirectAttributes redirectAttributes) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/user/login";
+        }
+        Optional<Trip> tripOpt = tripService.getTripById(id);
+        if (tripOpt.isPresent()) {
+            Trip trip = tripOpt.get();
+            if (!savedPackageService.isTripSaved(user, trip)) {
+                savedPackageService.saveTrip(user, trip);
+                redirectAttributes.addFlashAttribute("message", "Trip successfully saved to your wishlist!");
+            } else {
+                redirectAttributes.addFlashAttribute("message", "This trip is already in your saved list.");
+            }
+        }
+        return "redirect:/user/saved-trips";
     }
 
     @GetMapping("/saved-trips")
@@ -682,7 +748,7 @@ public class UserController {
         java.util.Optional<com.youthtravel.entity.Booking> bookingOpt = bookingService.getBookingById(id);
         if (bookingOpt.isPresent()) {
             com.youthtravel.entity.Booking booking = bookingOpt.get();
-            if (booking.getCustomerEmail().equals(user.getEmail()) && "Completed".equals(booking.getStatus())) {
+            if (booking.getCustomerEmail().equals(user.getEmail()) && "Completed".equals(booking.getStatus()) && !booking.isReviewed()) {
                 model.addAttribute("booking", booking);
                 return "users/write-review";
             }
@@ -699,7 +765,7 @@ public class UserController {
         java.util.Optional<com.youthtravel.entity.Booking> bookingOpt = bookingService.getBookingById(id);
         if (bookingOpt.isPresent()) {
             com.youthtravel.entity.Booking booking = bookingOpt.get();
-            if (booking.getCustomerEmail().equals(user.getEmail()) && "Completed".equals(booking.getStatus())) {
+            if (booking.getCustomerEmail().equals(user.getEmail()) && "Completed".equals(booking.getStatus()) && !booking.isReviewed()) {
                 com.youthtravel.entity.Review review = new com.youthtravel.entity.Review();
                 review.setUser(user);
                 review.setTrip(booking.getTrip());
@@ -707,6 +773,10 @@ public class UserController {
                 review.setReviewText(reviewText);
                 
                 reviewRepository.save(review);
+                
+                booking.setReviewed(true);
+                bookingService.saveBooking(booking);
+                
                 return "redirect:/user/my-bookings";
             }
         }
