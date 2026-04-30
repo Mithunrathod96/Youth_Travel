@@ -8,14 +8,15 @@
     <title>${user.name} | Premium Profile</title>
     <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --bg-gradient: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+            --bg-gradient: transparent;
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
             --accent-blue: #0095f6;
-            --accent-orange: #f09433;
+            --accent-orange: #e63946;
             --text-main: #ffffff;
             --text-dim: #b0b0b0;
         }
@@ -58,7 +59,7 @@
         .main-container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
 
         /* Premium Header */
-        .profile-header { display: flex; align-items: flex-start; gap: 80px; margin-bottom: 60px; padding: 20px; }
+        .profile-header { display: flex; align-items: flex-start; gap: 80px; margin-bottom: 60px; padding: 40px; background: rgba(0,0,0,0.3); backdrop-filter: blur(15px); border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
         
         .avatar-column { display: flex; flex-direction: column; align-items: center; width: 180px; }
         .avatar-wrapper { 
@@ -82,7 +83,7 @@
         }
 
         .user-meta-below { margin-top: 15px; text-align: center; }
-        .display-name { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+        .display-name { font-size: 20px; font-weight: 700; margin-bottom: 10px; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.8); text-transform: uppercase; }
         .btn-edit-premium { 
             background: rgba(255,255,255,0.1); 
             border: 1px solid var(--glass-border); 
@@ -90,18 +91,19 @@
             padding: 8px 25px; 
             border-radius: 10px; 
             font-size: 14px; 
-            font-weight: 600;
+            font-weight: 700;
             backdrop-filter: blur(10px);
             transition: 0.3s;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
-        .btn-edit-premium:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); }
+        .btn-edit-premium:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255,255,255,0.1); }
 
-        .info-column { flex: 1; padding-top: 20px; }
-        .username-row { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; font-size: 24px; color: var(--text-dim); }
+        .info-column { flex: 1; padding-top: 10px; }
+        .username-row { display: flex; align-items: center; gap: 10px; margin-bottom: 25px; font-size: 26px; color: #fff; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
         .stats-row { display: flex; gap: 40px; margin-bottom: 30px; }
         .stat-item { display: flex; align-items: baseline; gap: 8px; }
-        .stat-num { font-size: 24px; font-weight: 700; color: #ff9f43; }
-        .stat-label { font-size: 18px; color: var(--text-main); }
+        .stat-num { font-size: 28px; font-weight: 800; color: #ff9f43; text-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+        .stat-label { font-size: 18px; color: #fff; font-weight: 600; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 
         .icon-metrics { display: flex; gap: 20px; color: var(--text-dim); font-size: 18px; }
         .metric-item { display: flex; align-items: center; gap: 8px; background: var(--glass-bg); padding: 5px 15px; border-radius: 20px; border: 1px solid var(--glass-border); }
@@ -109,8 +111,8 @@
         /* Content Divider */
         .content-divider { border-top: 1px solid var(--glass-border); margin: 40px 0; display: flex; justify-content: center; position: relative; }
         .tabs-header { position: absolute; top: -15px; display: flex; gap: 100px; background: transparent; padding: 0 40px; }
-        .tab-trigger { font-size: 14px; font-weight: 700; color: var(--text-dim); cursor: pointer; display: flex; align-items: center; gap: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .tab-trigger.active { color: white; }
+        .tab-trigger { font-size: 16px; font-weight: 800; color: rgba(255,255,255,0.6); cursor: pointer; display: flex; align-items: center; gap: 10px; text-transform: uppercase; letter-spacing: 1.5px; text-shadow: 0 2px 8px rgba(0,0,0,0.8); transition: 0.3s; }
+        .tab-trigger.active { color: white; transform: scale(1.1); text-shadow: 0 2px 15px rgba(255,255,255,0.5); }
 
         /* Tab Content Layout */
         .content-grid { display: block; min-height: 400px; }
@@ -212,7 +214,33 @@
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
     </script>
 </head>
-<body>
+<body class="premium-theme">
+    <!-- Sunlight Rays -->
+    <div class="sun-rays-container">
+        <div class="ray ray-1"></div>
+        <div class="ray ray-2"></div>
+        <div class="ray ray-3"></div>
+        <div class="ray ray-4"></div>
+    </div>
+
+    <header class="header" style="position: fixed; top: 0; left: 0; right: 0; height: 70px; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <div class="header-logo"><a href="<c:url value='/'/>"><img src="<c:url value='/views/assets/images/logo.png'/>" style="height: 35px;"></a></div>
+        <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <span style="font-weight: 700;">Hi, ${user.name}</span>
+                <c:set var="defaultAvatar" value="https://ui-avatars.com/api/?name=${user.name}&background=f04c26&color=fff" />
+                <img src="${not empty user.profilePhoto ? user.profilePhoto : defaultAvatar}" style="width: 32px; height: 32px; border-radius: 50%; object-fit: cover;">
+            </div>
+        </div>
+    </header>
+
+    <div class="wrapper" style="display: flex; min-height: 100vh;">
+        <jsp:include page="user-sidebar.jsp">
+            <jsp:param name="activePage" value="profile" />
+        </jsp:include>
+        
+        <main class="main-content" style="flex: 1; margin-left: 240px; padding: 100px 30px 40px;">
+
 
     <!-- Nuclear Option Modals (Pure JS/CSS - 100% Reliable) -->
     <div id="adviceModal" class="unbreakable-modal">
@@ -377,12 +405,8 @@
         </section>
     </main>
 
-    <!-- Bottom Nav -->
-    <nav class="bottom-nav">
-        <div class="nav-item" onclick="window.location.href='/user/dashboard'"><i class="fa fa-home"></i></div>
-        <div class="nav-item" onclick="openModal('postModal')"><i class="fa fa-plus-square"></i></div>
-        <div class="nav-item" onclick="window.location.href='/user/profile'"><i class="fa fa-user-circle"></i></div>
-    </nav>
+        </main>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>

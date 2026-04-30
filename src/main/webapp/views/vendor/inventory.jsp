@@ -9,20 +9,23 @@
             <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+            <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
             <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
             <style>
                 body.yt-dark {
-                    background: #0b0f18;
+                    background: transparent;
                     color: #fff;
                     font-family: 'Dosis', sans-serif;
                 }
 
                 .inventory-card {
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    background: rgba(0,0,0,0.4);
+                    backdrop-filter: blur(15px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
                     border-radius: 20px;
-                    padding: 25px;
+                    padding: 30px;
                     margin-bottom: 25px;
+                    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
                 }
 
                 .status-badge {
@@ -59,13 +62,19 @@
             </style>
         </head>
 
-        <body class="yt-dark">
+        <body class="yt-dark premium-theme">
+        <div class="sun-rays-container">
+            <div class="ray ray-1"></div>
+            <div class="ray ray-2"></div>
+            <div class="ray ray-3"></div>
+            <div class="ray ray-4"></div>
+        </div>
                 <jsp:include page="vendor-sidebar.jsp">
         <jsp:param name="activePage" value="inventory" />
     </jsp:include>
 
     <div class="main-content">
-                <h2 style="font-weight: 800; margin-bottom: 30px;">Live Slot & Inventory Management</h2>
+                <h2 style="font-weight: 800; margin-bottom: 40px; color: #fff; text-shadow: 0 4px 15px rgba(0,0,0,0.8); font-size: 36px;">Live Slot & Inventory Management</h2>
 
                 <c:forEach var="trip" items="${trips}">
                     <c:set var="occupied" value="${occupiedMap[trip.id] != null ? occupiedMap[trip.id] : 0}" />
@@ -77,13 +86,13 @@
                     <div class="inventory-card">
                         <div class="row align-items-center">
                             <div class="col-md-4">
-                                <h4 style="margin: 0; font-weight: 700;">${trip.title}</h4>
-                                <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-top: 5px;">
-                                    ${trip.destination}</p>
+                                <h4 style="margin: 0; font-weight: 800; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">${trip.title}</h4>
+                                <p style="color: #fff; font-size: 14px; margin-top: 5px; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">
+                                    <i class="fa fa-map-marker" style="color: #f04c26;"></i> ${trip.destination}</p>
                             </div>
                             <div class="col-md-3">
-                                <div style="font-size: 13px; color: rgba(255,255,255,0.5);">Total Occupancy</div>
-                                <div style="font-size: 20px; font-weight: 800;">
+                                <div style="font-size: 13px; color: #fff; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">Total Occupancy</div>
+                                <div style="font-size: 24px; font-weight: 800; color: #ff9f43; text-shadow: 0 2px 8px rgba(0,0,0,0.5);">
                                     <fmt:formatNumber value="${occupancy}" maxFractionDigits="0" />%
                                 </div>
                             </div>

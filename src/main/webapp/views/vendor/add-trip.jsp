@@ -11,29 +11,33 @@
             <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+            <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
             <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
             <style>
                 body.yt-dark {
-                    background: #0b0f18;
+                    background: transparent;
                     color: #fff;
                     font-family: 'Dosis', sans-serif;
                 }
 
                 .form-card {
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    background: rgba(0,0,0,0.3);
+                    backdrop-filter: blur(15px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
                     border-radius: 24px;
                     padding: 40px;
+                    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
                 }
 
                 .section-title {
-                    font-size: 20px;
+                    font-size: 24px;
                     font-weight: 800;
-                    color: #f04c26;
+                    color: #fff;
                     margin-bottom: 35px;
                     display: flex;
                     align-items: center;
                     gap: 12px;
+                    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
                 }
 
                 .section-title .badge {
@@ -49,21 +53,23 @@
                 }
 
                 .form-group label {
-                    color: rgba(255, 255, 255, 0.6);
-                    font-weight: 600;
-                    font-size: 14px;
-                    margin-bottom: 10px;
+                    color: #fff;
+                    font-weight: 700;
+                    font-size: 15px;
+                    margin-bottom: 12px;
                     display: block;
+                    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
                 }
 
                 .form-control {
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: rgba(0,0,0,0.4);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
                     border-radius: 12px;
                     color: #fff;
                     height: 50px;
                     padding: 0 16px;
                     transition: all 0.2s;
+                    backdrop-filter: blur(5px);
                 }
 
                 .form-control:focus {
@@ -103,11 +109,17 @@
 
                 .custom-checkbox {
                     position: relative;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
+                    padding-left: 35px;
+                    margin-bottom: 12px;
                     cursor: pointer;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: #ffffff !important;
                     user-select: none;
+                    display: block;
+                    transition: all 0.2s;
+                    line-height: 20px;
+                    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
                 }
 
                 .custom-checkbox input {
@@ -119,37 +131,57 @@
                 }
 
                 .checkmark {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
                     height: 20px;
                     width: 20px;
-                    background-color: rgba(255, 255, 255, 0.08);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background-color: rgba(255, 255, 255, 0.1);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
                     border-radius: 6px;
+                    transition: all 0.2s;
                 }
 
-                .custom-checkbox:hover input~.checkmark {
-                    background-color: rgba(255, 255, 255, 0.12);
+                .custom-checkbox:hover .checkmark {
+                    background-color: rgba(255, 255, 255, 0.2);
+                    border-color: #f04c26;
                 }
 
-                .custom-checkbox input:checked~.checkmark {
+                .custom-checkbox input:checked ~ .checkmark {
                     background-color: #f04c26;
                     border-color: #f04c26;
+                    box-shadow: 0 0 10px rgba(240, 76, 38, 0.3);
                 }
 
                 .checkmark:after {
                     content: "";
                     position: absolute;
                     display: none;
+                }
+
+                .custom-checkbox input:checked ~ .checkmark:after {
+                    display: block;
+                }
+
+                .custom-checkbox .checkmark:after {
                     left: 7px;
                     top: 3px;
-                    width: 6px;
-                    height: 11px;
+                    width: 5px;
+                    height: 10px;
                     border: solid white;
                     border-width: 0 2px 2px 0;
                     transform: rotate(45deg);
                 }
 
-                .custom-checkbox input:checked~.checkmark:after {
-                    display: block;
+                .dropdown-menu {
+                    background: #1a1f2b !important;
+                    border: 1px solid rgba(255,255,255,0.1) !important;
+                    box-shadow: 0 15px 35px rgba(0,0,0,0.5) !important;
+                    padding: 15px !important;
+                }
+
+                .dropdown-menu label:hover {
+                    color: #f04c26 !important;
                 }
 
                 .btn-submit {
@@ -181,13 +213,15 @@
                 }
 
                 .itinerary-day {
-                    background: rgba(255, 255, 255, 0.02);
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    background: rgba(0,0,0,0.3);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
                     border-radius: 16px;
-                    padding: 25px;
-                    margin-bottom: 20px;
+                    padding: 30px;
+                    margin-bottom: 25px;
                     position: relative;
                     animation: slideDown 0.3s ease-out;
+                    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
                 }
 
                 /* Utility Classes */
@@ -531,7 +565,13 @@
             </style>
         </head>
 
-        <body class="yt-dark">
+        <body class="yt-dark premium-theme">
+        <div class="sun-rays-container">
+            <div class="ray ray-1"></div>
+            <div class="ray ray-2"></div>
+            <div class="ray ray-3"></div>
+            <div class="ray ray-4"></div>
+        </div>
                 <jsp:include page="vendor-sidebar.jsp">
         <jsp:param name="activePage" value="add-trip" />
     </jsp:include>
@@ -1305,9 +1345,7 @@
 
                     let html = '';
                     allSubs.forEach(s => {
-                        html += `
-                            <label class="custom-checkbox"><input type="checkbox" name="travelerSubCategories" value="\${s}" onchange="checkSubOther()"><span class="checkmark"></span> \${s}</label>
-                        `;
+                        html += '<label class="custom-checkbox"><input type="checkbox" name="travelerSubCategories" value="' + s + '" onchange="checkSubOther()"><span class="checkmark"></span> <span class="checkbox-text">' + s + '</span></label>';
                     });
                     list.innerHTML = html;
 

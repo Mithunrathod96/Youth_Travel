@@ -11,10 +11,11 @@
             <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+            <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
             <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
             <style>
                 body.yt-dark {
-                    background: #0b0f18;
+                    background: transparent;
                     color: #fff;
                     font-family: 'Dosis', sans-serif;
                 }
@@ -30,6 +31,8 @@
                     font-size: 32px;
                     font-weight: 800;
                     margin: 0;
+                    color: #fff;
+                    text-shadow: 0 4px 15px rgba(0,0,0,0.8);
                 }
 
                 .btn-add {
@@ -61,14 +64,16 @@
                 }
 
                 .trip-card {
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    background: rgba(0,0,0,0.4);
+                    backdrop-filter: blur(15px);
+                    border: 1px solid rgba(255,255,255,0.1);
                     border-radius: 28px;
                     overflow: hidden;
                     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                     position: relative;
                     display: flex;
                     flex-direction: column;
+                    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
                 }
 
                 .trip-card:hover {
@@ -131,22 +136,25 @@
                     font-weight: 800;
                     color: #fff;
                     margin-bottom: 8px;
+                    text-shadow: 0 2px 5px rgba(0,0,0,0.5);
                 }
-
                 .card-meta {
                     display: flex;
                     align-items: center;
                     gap: 12px;
-                    color: rgba(255, 255, 255, 0.5);
+                    color: #fff;
                     font-size: 13px;
                     margin-bottom: 15px;
+                    font-weight: 600;
+                    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
                 }
 
                 .card-category {
-                    background: rgba(255, 255, 255, 0.05);
-                    padding: 10px;
+                    background: rgba(0,0,0,0.3);
+                    padding: 12px;
                     border-radius: 12px;
                     margin-bottom: 20px;
+                    border: 1px solid rgba(255,255,255,0.05);
                 }
 
                 .category-label {
@@ -231,7 +239,13 @@
             </style>
         </head>
 
-        <body class="yt-dark">
+        <body class="yt-dark premium-theme">
+            <div class="sun-rays-container">
+                <div class="ray ray-1"></div>
+                <div class="ray ray-2"></div>
+                <div class="ray ray-3"></div>
+                <div class="ray ray-4"></div>
+            </div>
                 <jsp:include page="vendor-sidebar.jsp">
         <jsp:param name="activePage" value="tours" />
     </jsp:include>
@@ -250,10 +264,10 @@
                 </c:if>
 
                 <div class="page-header">
-                    <div>
-                        <h1>Tour Portfolio</h1>
-                        <p style="color: rgba(255,255,255,0.5); margin-top: 5px;">Manage your travel collection.</p>
-                    </div>
+                            <div>
+                                <h1>Tour Portfolio</h1>
+                                <p style="color: #fff; margin: 0; font-weight: 600; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">Manage your travel collection.</p>
+                            </div>
                     <a href="<c:url value='/vendor/add-trip'/>" class="btn-add">
                         <i class="fa fa-plus"></i> Launch New Trip
                     </a>

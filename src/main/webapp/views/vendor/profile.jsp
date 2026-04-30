@@ -10,21 +10,24 @@
             <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+            <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
             <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
             <style>
                 body.yt-dark {
-                    background: #0b0f18;
+                    background: transparent;
                     color: #fff;
                     font-family: 'Dosis', sans-serif;
                     margin: 0;
                 }
 
                 .profile-card {
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    background: rgba(0,0,0,0.3);
+                    backdrop-filter: blur(15px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
                     border-radius: 24px;
                     padding: 40px;
                     min-height: 500px;
+                    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
                 }
 
                 .nav-tabs {
@@ -60,11 +63,12 @@
                 }
 
                 .form-group label {
-                    color: rgba(255, 255, 255, 0.6);
-                    font-weight: 600;
-                    font-size: 13px;
-                    margin-bottom: 8px;
+                    color: #fff;
+                    font-weight: 700;
+                    font-size: 14px;
+                    margin-bottom: 10px;
                     display: block;
+                    text-shadow: 0 2px 5px rgba(0,0,0,0.8);
                 }
 
                 .form-control {
@@ -94,21 +98,24 @@
                 }
 
                 .section-subtitle {
-                    font-size: 16px;
+                    font-size: 18px;
                     font-weight: 800;
                     color: #fff;
-                    margin-bottom: 15px;
-                    border-left: 3px solid #f04c26;
-                    padding-left: 12px;
+                    margin-bottom: 20px;
+                    border-left: 4px solid #f04c26;
+                    padding-left: 15px;
+                    text-shadow: 0 2px 8px rgba(0,0,0,0.8);
                 }
 
                 .upload-box {
-                    border: 2px dashed rgba(255, 255, 255, 0.1);
+                    border: 2px dashed rgba(255, 255, 255, 0.2);
                     border-radius: 12px;
-                    padding: 20px;
+                    padding: 25px;
                     text-align: center;
-                    background: rgba(255, 255, 255, 0.02);
+                    background: rgba(0,0,0,0.4);
+                    backdrop-filter: blur(5px);
                     cursor: pointer;
+                    transition: 0.3s;
                 }
 
                 .upload-box i {
@@ -130,7 +137,13 @@
             </style>
         </head>
 
-        <body class="yt-dark">
+        <body class="yt-dark premium-theme">
+        <div class="sun-rays-container">
+            <div class="ray ray-1"></div>
+            <div class="ray ray-2"></div>
+            <div class="ray ray-3"></div>
+            <div class="ray ray-4"></div>
+        </div>
                 <jsp:include page="vendor-sidebar.jsp">
         <jsp:param name="activePage" value="profile" />
     </jsp:include>
@@ -142,10 +155,9 @@
                         <i class="fa fa-bars"></i>
                     </div>
                 </div>
-                <div style="margin-bottom: 25px;">
-                    <h1 style="font-weight: 800; font-size: 28px; margin:0;">Business Profile</h1>
-                    <p style="color: rgba(255,255,255,0.5); font-size: 14px;">Update branding, legal and banking
-                        details.</p>
+                <div style="margin-bottom: 35px;">
+                    <h1 style="font-weight: 800; font-size: 36px; margin:0; color: #fff; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">Business Profile</h1>
+                    <p style="color: #fff; font-size: 16px; font-weight: 600; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">Update branding, legal and banking details.</p>
                 </div>
 
                 <c:if test="${not empty message}">

@@ -9,35 +9,42 @@
             <title>Earnings | Youth Travel</title>
             <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
+            <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
+            <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
             <style>
                 body.yt-dark {
-                    background: #0b0f18;
+                    background: transparent;
                     color: #fff;
                     font-family: 'Dosis', sans-serif;
                 }
 
                 .earning-card {
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    border-radius: 20px;
-                    padding: 30px;
+                    background: rgba(0,0,0,0.4);
+                    backdrop-filter: blur(15px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 24px;
+                    padding: 35px;
                     text-align: center;
+                    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
                 }
 
                 .earning-amount {
-                    font-size: 48px;
+                    font-size: 52px;
                     font-weight: 800;
-                    color: #10b981;
+                    color: #fff;
                     margin: 15px 0;
+                    text-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
                 }
 
                 .transaction-card {
-                    background: rgba(255, 255, 255, 0.03);
-                    border: 1px solid rgba(255, 255, 255, 0.08);
-                    border-radius: 20px;
-                    margin-top: 30px;
+                    background: rgba(0,0,0,0.4);
+                    backdrop-filter: blur(15px);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 24px;
+                    margin-top: 40px;
                     overflow: hidden;
+                    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
                 }
 
                 .table {
@@ -46,20 +53,33 @@
                 }
 
                 .table thead th {
-                    background: rgba(255, 255, 255, 0.02);
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-                    color: rgba(255, 255, 255, 0.4);
+                    background: rgba(0,0,0,0.3);
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    color: #fff;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    letter-spacing: 1.5px;
                     padding: 20px;
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
                 }
 
                 .table tbody td {
                     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-                    padding: 20px;
+                    padding: 22px 20px;
+                    color: #fff;
+                    font-weight: 500;
+                    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
                 }
             </style>
         </head>
 
-        <body class="yt-dark">
+        <body class="yt-dark premium-theme">
+        <div class="sun-rays-container">
+            <div class="ray ray-1"></div>
+            <div class="ray ray-2"></div>
+            <div class="ray ray-3"></div>
+            <div class="ray ray-4"></div>
+        </div>
                 <jsp:include page="vendor-sidebar.jsp">
         <jsp:param name="activePage" value="earnings" />
     </jsp:include>
@@ -71,7 +91,7 @@
                         <i class="fa fa-bars"></i>
                     </div>
                 </div>
-                <h1 style="font-weight: 800; font-size: 32px; margin-bottom: 35px;">Financial Analytics</h1>
+                <h1 style="font-weight: 800; font-size: 38px; margin-bottom: 40px; color: #fff; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">Financial Analytics</h1>
 
                 <div class="row">
                     <div class="col-md-4">

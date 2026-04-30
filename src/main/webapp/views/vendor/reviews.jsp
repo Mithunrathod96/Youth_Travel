@@ -8,18 +8,21 @@
     <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
     <style>
         :root { --primary-blue: #f04c26; --transition: all 0.3s ease; }
-        body.yt-dark { background: #0b0f18; color: #fff; font-family: 'Dosis', sans-serif; }
+        body.yt-dark { background: transparent; color: #fff; font-family: 'Dosis', sans-serif; }
 
         .review-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 30px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 35px;
             margin-bottom: 25px;
             transition: var(--transition);
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
         }
 
         .review-card:hover {
@@ -53,7 +56,13 @@
     </style>
 </head>
 
-<body class="yt-dark">
+<body class="yt-dark premium-theme">
+    <div class="sun-rays-container">
+        <div class="ray ray-1"></div>
+        <div class="ray ray-2"></div>
+        <div class="ray ray-3"></div>
+        <div class="ray ray-4"></div>
+    </div>
     <jsp:include page="vendor-sidebar.jsp">
         <jsp:param name="activePage" value="reviews" />
     </jsp:include>
@@ -62,14 +71,14 @@
     <div class="main-content">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
             <div>
-                <h2 style="font-weight: 800; margin: 0; font-size: 32px;">Customer Reviews</h2>
-                <p style="color: rgba(255,255,255,0.5); margin-top: 5px;">See what your travelers are saying about your trips.</p>
+                <h2 style="font-weight: 800; margin: 0; font-size: 38px; color: #fff; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">Customer Reviews</h2>
+                <p style="color: #fff; margin-top: 5px; font-weight: 600; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">See what your travelers are saying about your trips.</p>
             </div>
             <div style="text-align: right;">
-                <div style="font-size: 36px; font-weight: 800; color: #f59e0b;">
+                <div style="font-size: 42px; font-weight: 800; color: #f59e0b; text-shadow: 0 2px 15px rgba(245, 158, 11, 0.3);">
                     <i class="fa fa-star"></i> 4.8
                 </div>
-                <div style="color: rgba(255,255,255,0.5); font-size: 14px;">Average Rating</div>
+                <div style="color: #fff; font-size: 14px; font-weight: 700; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">Average Rating</div>
             </div>
         </div>
 
@@ -81,8 +90,8 @@
                         <div class="reviewer-info">
                             <img src="https://ui-avatars.com/api/?name=${review.user.name}&background=random">
                             <div>
-                                <div style="font-weight: 700; font-size: 18px;">${review.user.name}</div>
-                                <div style="color: rgba(255,255,255,0.4); font-size: 13px;">${review.createdAt.toLocalDate()}</div>
+                                <div style="font-weight: 800; font-size: 20px; color: #fff; text-shadow: 0 2px 5px rgba(0,0,0,0.5);">${review.user.name}</div>
+                                <div style="color: #fff; font-size: 13px; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">${review.createdAt.toLocalDate()}</div>
                             </div>
                         </div>
                         <div class="stars">
@@ -93,7 +102,7 @@
                                 <i class="fa fa-star-o" style="color: rgba(255,255,255,0.2);"></i>
                             </c:forEach>
                         </div>
-                        <p style="color: rgba(255,255,255,0.8); line-height: 1.6; font-size: 15px;">
+                        <p style="color: #fff; line-height: 1.6; font-size: 16px; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.5); font-style: italic;">
                             "${review.reviewText}"
                         </p>
                     </div>

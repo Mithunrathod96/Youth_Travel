@@ -9,13 +9,14 @@
             <title>User Dashboard | Youth Travel</title>
             <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+            <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
             <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
             <style>
                 :root {
-                    --primary-blue: #f04c26;
+                    --primary-blue: #e63946;
                     --text-muted: #7e8c9a;
                     --transition: all 0.3s ease;
-                    --dark-card: #161c28;
+                    --dark-card: rgba(22, 28, 40, 0.7);
                 }
 
                 body {
@@ -78,45 +79,6 @@
         .sold-out-badge { position: absolute; top: 15px; left: 15px; background: #e11d48; color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 800; text-transform: uppercase; z-index: 10; box-shadow: 0 4px 10px rgba(225, 29, 72, 0.3); }
         .sold-out .btn-view { display: none; }
 
-
-                .sidebar {
-                    width: 240px;
-                    background: #161c28;
-                    padding-top: 80px;
-                    position: fixed;
-                    height: 100vh;
-                    border-right: 1px solid rgba(255, 255, 255, 0.05);
-                }
-
-                .nav-menu {
-                    list-style: none;
-                    padding: 0;
-                    margin: 0;
-                }
-
-                .nav-item a {
-                    display: flex;
-                    align-items: center;
-                    padding: 12px 25px;
-                    color: rgba(255, 255, 255, 0.6);
-                    text-decoration: none;
-                    font-weight: 500;
-                    transition: var(--transition);
-                    gap: 15px;
-                    font-size: 15px;
-                }
-
-                .nav-item.active a {
-                    background: var(--primary-blue);
-                    color: #fff;
-                    border-radius: 0 25px 25px 0;
-                    margin-right: 15px;
-                }
-
-                .nav-item a:hover:not(.active) {
-                    color: #fff;
-                    background: rgba(240, 76, 38, 0.1);
-                }
 
                 .main-content {
                     flex: 1;
@@ -181,7 +143,13 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    margin-bottom: 30px;
+                    margin-bottom: 40px;
+                    background: rgba(0, 0, 0, 0.3);
+                    backdrop-filter: blur(10px);
+                    padding: 30px;
+                    border-radius: 20px;
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
                 }
 
                 .search-container {
@@ -190,18 +158,22 @@
                 }
 
                 .search-container input {
-                    background: var(--dark-card);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: rgba(0, 0, 0, 0.4);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
                     border-radius: 12px;
                     color: #fff;
                     padding: 12px 40px 12px 20px;
                     width: 100%;
                     transition: var(--transition);
+                    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
                 }
 
                 .search-container input:focus {
                     border-color: var(--primary-blue);
+                    background: rgba(255, 255, 255, 0.08);
                     outline: none;
+                    box-shadow: 0 0 15px rgba(230, 57, 70, 0.2);
                 }
 
                 .search-container i {
@@ -213,11 +185,14 @@
                 }
 
                 .filter-card {
-                    background: var(--dark-card);
+                    background: rgba(255, 255, 255, 0.03);
+                    backdrop-filter: blur(15px);
+                    -webkit-backdrop-filter: blur(15px);
                     border-radius: 20px;
                     padding: 25px;
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
                     margin-bottom: 35px;
+                    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
                 }
 
                 .filter-label {
@@ -230,13 +205,16 @@
                 }
 
                 .form-select-custom {
-                    background: rgba(255, 255, 255, 0.05);
-                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    background: rgba(0, 0, 0, 0.4);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.2);
                     border-radius: 10px;
                     color: #fff !important;
-                    padding: 10px;
-                    width: 100%;
+                    padding: 8px 15px;
+                    width: auto;
                     cursor: pointer;
+                    font-weight: 600;
+                    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
                 }
 
                 .form-select-custom option {
@@ -352,6 +330,7 @@
                     margin: 0;
                     text-transform: uppercase;
                     letter-spacing: 1px;
+                    text-shadow: 0 2px 10px rgba(0,0,0,0.8);
                 }
 
                 .package-grid {
@@ -361,12 +340,15 @@
                 }
 
                 .package-card {
-                    background: var(--dark-card);
+                    background: rgba(255, 255, 255, 0.03);
+                    backdrop-filter: blur(15px);
+                    -webkit-backdrop-filter: blur(15px);
                     border-radius: 15px;
                     overflow: hidden;
-                    border: 1px solid rgba(255, 255, 255, 0.05);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
                     transition: var(--transition);
                     position: relative;
+                    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
                 }
 
                 .package-card:hover {
@@ -458,6 +440,7 @@
                     display: -webkit-box;
                     -webkit-line-clamp: 2;
                     -webkit-box-orient: vertical;
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
                 }
 
                 .package-footer {
@@ -473,6 +456,7 @@
                     font-size: 20px;
                     font-weight: 800;
                     color: #fff;
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
                 }
 
                 .btn-view {
@@ -501,7 +485,14 @@
             </style>
         </head>
 
-        <body>
+        <body class="premium-theme">
+            <!-- Sunlight Rays -->
+            <div class="sun-rays-container">
+                <div class="ray ray-1"></div>
+                <div class="ray ray-2"></div>
+                <div class="ray ray-3"></div>
+                <div class="ray ray-4"></div>
+            </div>
             <header class="header">
                 <div class="header-logo"><a href="<c:url value='/'/>"><img
                             src="<c:url value='/views/assets/images/logo.png'/>" style="height: 35px;"></a></div>
@@ -516,33 +507,15 @@
                 </div>
             </header>
             <div class="wrapper">
-                <aside class="sidebar">
-                    <ul class="nav-menu">
-                        <li class="nav-item active"><a href="<c:url value='/user/dashboard'/>"><i class="fa fa-th-large"></i> Dashboard</a></li>
-                        <li class="nav-item"><a href="<c:url value='/user/explore'/>"><i class="fa fa-users"></i> Explore Users</a></li>
-                        <li class="nav-item"><a href="<c:url value='/user/my-bookings'/>"><i class="fa fa-calendar-check-o"></i> My Bookings</a></li>
-                        <li class="nav-item"><a href="<c:url value='/user/saved-trips'/>"><i class="fa fa-heart-o"></i>
-                                Saved Trips</a></li>
-                        <li class="nav-item"><a href="<c:url value='/user/my-reviews'/>"><i class="fa fa-star-o"></i> My
-                                Reviews</a></li>
-                        <li class="nav-item"><a href="<c:url value='/user/payments'/>"><i class="fa fa-credit-card"></i>
-                                Payments</a></li>
-                        <li class="nav-item"><a href="<c:url value='/user/messages'/>"><i class="fa fa-envelope-o"></i>
-                                Messages</a></li>
-                        <li style="margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.1);"></li>
-                        <li class="nav-item"><a href="<c:url value='/user/profile'/>"><i class="fa fa-cog"></i> Profile
-                                Settings</a></li>
-                        <li class="nav-item"><a href="<c:url value='/user/logout'/>"><i class="fa fa-sign-out"></i>
-                                Logout</a></li>
-                    </ul>
-                </aside>
+                <jsp:include page="user-sidebar.jsp">
+                    <jsp:param name="activePage" value="dashboard" />
+                </jsp:include>
                 <main class="main-content">
                     <form action="<c:url value='/user/dashboard'/>" method="GET" id="filterForm">
                         <div class="dash-header">
                             <div>
-                                <h1 style="font-weight: 800; margin: 0; font-size: 32px;">Dashboard</h1>
-                                <p style="color: var(--text-muted); margin: 0;">Discover amazing travel packages and
-                                    plan your next adventure.</p>
+                                <h1 style="font-weight: 800; margin: 0; font-size: 32px; text-shadow: 0 4px 15px rgba(0,0,0,0.8); color: #fff;">Dashboard</h1>
+                                <p style="color: #fff; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.8); font-weight: 600; font-size: 15px;">Discover amazing travel packages and plan your next adventure.</p>
                             </div>
                             <div style="display: flex; gap: 15px; align-items: center;">
                                 <div class="search-container" style="width: 300px;">
@@ -662,10 +635,10 @@
                             <!-- MAIN CONTENT AREA -->
                             <div style="width: 100%;">
                                 <div class="results-meta" style="margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 20px;">
-                                    <div style="font-weight: 700; font-size: 16px;">Showing ${totalCount} packages</div>
+                                    <div style="font-weight: 700; font-size: 16px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); color: #fff;">Showing ${totalCount} packages</div>
                                     <div class="sort-container" style="display: flex; align-items: center; gap: 15px;">
                                         <div style="display: flex; align-items: center; gap: 8px;">
-                                            <span style="font-size: 13px; font-weight: 700; color: var(--text-muted);">Group by:</span>
+                                            <span style="font-size: 13px; font-weight: 700; color: #fff; text-shadow: 0 1px 5px rgba(0,0,0,0.8);">Group by:</span>
                                             <select name="groupBy" class="form-select-custom" style="width: auto; padding: 8px 15px; border-radius: 10px;" onchange="this.form.submit()">
                                                 <option value="travelerType" ${currentParams.groupBy == 'travelerType' ? 'selected' : ''}>Traveler Type</option>
                                                 <option value="activity" ${currentParams.groupBy == 'activity' ? 'selected' : ''}>Activity</option>
@@ -675,7 +648,7 @@
                                             </select>
                                         </div>
                                         <div style="display: flex; align-items: center; gap: 8px;">
-                                            <span style="font-size: 13px; font-weight: 700; color: var(--text-muted);">Sort by:</span>
+                                            <span style="font-size: 13px; font-weight: 700; color: #fff; text-shadow: 0 1px 5px rgba(0,0,0,0.8);">Sort by:</span>
                                             <select name="sortBy" class="form-select-custom" style="width: auto; padding: 8px 15px; border-radius: 10px;" onchange="this.form.submit()">
                                                 <option value="latest" ${currentParams.sortBy == 'latest' ? 'selected' : ''}>Latest</option>
                                                 <option value="priceLow" ${currentParams.sortBy == 'priceLow' ? 'selected' : ''}>Price: Low to High</option>

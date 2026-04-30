@@ -9,46 +9,61 @@
             <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
             <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+            <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
             <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
             <style>
                 body.yt-dark {
-                    background: #0b0f18;
+                    background: transparent;
                     color: #fff;
                     font-family: 'Dosis', sans-serif;
                 }
 
                 .manifest-table {
-                    background: rgba(255, 255, 255, 0.03);
-                    border-radius: 20px;
+                    background: rgba(0,0,0,0.4);
+                    backdrop-filter: blur(15px);
+                    border-radius: 24px;
                     overflow: hidden;
-                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
                 }
 
                 .manifest-table th {
-                    background: rgba(255, 255, 255, 0.05);
-                    color: rgba(255, 255, 255, 0.5);
+                    background: rgba(0,0,0,0.3);
+                    color: #fff;
                     font-size: 13px;
+                    font-weight: 800;
                     text-transform: uppercase;
-                    padding: 15px 20px;
+                    letter-spacing: 1.5px;
+                    padding: 20px;
                     border: none;
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
                 }
 
                 .manifest-table td {
-                    padding: 15px 20px;
+                    padding: 20px;
                     vertical-align: middle;
                     border-color: rgba(255, 255, 255, 0.05);
+                    color: #fff;
+                    font-weight: 600;
+                    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
                 }
             </style>
         </head>
 
-        <body class="yt-dark">
+        <body class="yt-dark premium-theme">
+        <div class="sun-rays-container">
+            <div class="ray ray-1"></div>
+            <div class="ray ray-2"></div>
+            <div class="ray ray-3"></div>
+            <div class="ray ray-4"></div>
+        </div>
                 <jsp:include page="vendor-sidebar.jsp">
         <jsp:param name="activePage" value="guest-list" />
     </jsp:include>
 
     <div class="main-content">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h2 style="font-weight: 800; margin: 0;">Guest Manifest (Automated List)</h2>
+                <div class="d-flex justify-content-between align-items-center mb-5">
+                    <h2 style="font-weight: 800; margin: 0; font-size: 36px; color: #fff; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">Guest Manifest (Automated List)</h2>
                     <button class="btn btn-primary"
                         style="background: #f04c26; border: none; border-radius: 10px; padding: 10px 20px; font-weight: 700;">
                         <i class="fa fa-download"></i> Download Export (CSV/PDF)

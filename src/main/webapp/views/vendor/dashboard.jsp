@@ -10,14 +10,15 @@
     <title>Vendor Dashboard | Youth Travel</title>
     <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #f04c26;
-            --primary-gradient: linear-gradient(135deg, #f04c26 0%, #d84422 100%);
-            --bg-color: #0b0f18;
-            --card-bg: rgba(255, 255, 255, 0.03);
-            --card-border: rgba(255, 255, 255, 0.05);
+            --primary-color: #e63946;
+            --primary-gradient: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
+            --bg-color: transparent;
+            --card-bg: rgba(30, 30, 35, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
             --text-main: #ffffff;
             --text-muted: rgba(255, 255, 255, 0.6);
             --success: #22c55e;
@@ -27,7 +28,7 @@
         }
 
         body.yt-dark {
-            background: var(--bg-color);
+            background: transparent;
             color: var(--text-main);
             font-family: 'Dosis', sans-serif;
             overflow-x: hidden;
@@ -53,21 +54,20 @@
         }
 
         .hero-content h1 {
-            font-size: 48px;
+            font-size: 52px;
             font-weight: 800;
             margin: 0;
-            letter-spacing: -1px;
-            background: linear-gradient(to right, #fff, rgba(255,255,255,0.6));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            letter-spacing: -1.5px;
+            color: #fff;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
         .hero-content p {
-            font-size: 18px;
-            color: rgba(255,255,255,0.8);
-            margin-top: 10px;
-            font-weight: 500;
+            font-size: 20px;
+            color: #fff;
+            margin-top: 12px;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
         /* --- Stats Grid (Overlapping Hero) --- */
@@ -86,11 +86,11 @@
         }
 
         .stat-card {
-            background: rgba(22, 28, 40, 0.8);
+            background: rgba(0,0,0,0.4);
             backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 28px;
+            padding: 35px;
             display: flex;
             align-items: center;
             gap: 25px;
@@ -98,6 +98,7 @@
             position: relative;
             overflow: hidden;
             text-decoration: none;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
         }
 
         .stat-card::after {
@@ -135,18 +136,22 @@
 
         .stat-info { position: relative; z-index: 2; }
         .stat-info h3 {
-            font-size: 36px;
+            font-size: 38px;
             font-weight: 800;
             margin: 0;
             color: #fff;
             line-height: 1;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
         .stat-info p {
-            color: var(--text-muted);
+            color: #fff;
             font-size: 14px;
-            margin: 8px 0 0;
-            font-weight: 700;
+            margin: 10px 0 0;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -325,7 +330,14 @@
     </style>
 </head>
 
-<body class="yt-dark">
+<body class="yt-dark premium-theme">
+    <!-- Sunlight Rays -->
+    <div class="sun-rays-container">
+        <div class="ray ray-1"></div>
+        <div class="ray ray-2"></div>
+        <div class="ray ray-3"></div>
+        <div class="ray ray-4"></div>
+    </div>
 
     <jsp:include page="vendor-sidebar.jsp">
         <jsp:param name="activePage" value="dashboard" />

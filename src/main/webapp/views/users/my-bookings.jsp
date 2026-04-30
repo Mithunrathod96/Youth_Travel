@@ -8,37 +8,36 @@
     <title>My Bookings | Youth Travel</title>
     <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
     <style>
-        :root { --primary-blue: #f04c26; --text-muted: #7e8c9a; --transition: all 0.3s ease; }
+        :root { --primary-blue: #e63946; --text-muted: #7e8c9a; --transition: all 0.3s ease; }
         body { font-family: 'Dosis', sans-serif; background-color: #0b0f18; color: rgba(255, 255, 255, 0.92); margin: 0; padding: 0; }
         .wrapper { display: flex; min-height: 100vh; }
-        .header { position: fixed; top: 0; left: 0; right: 0; height: 70px; background: #161c28; display: flex; align-items: center; justify-content: space-between; padding: 0 30px; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .sidebar { width: 240px; background: #161c28; padding-top: 80px; position: fixed; height: 100vh; border-right: 1px solid rgba(255,255,255,0.05); }
-        .nav-menu { list-style: none; padding: 0; margin: 0; }
-        .nav-item a { display: flex; align-items: center; padding: 12px 25px; color: rgba(255,255,255,0.6); text-decoration: none; font-weight: 500; transition: var(--transition); gap: 15px; font-size: 15px; }
-        .nav-item.active a { background: var(--primary-blue); color: #fff; border-radius: 0 25px 25px 0; margin-right: 15px; }
-        .nav-item a:hover:not(.active) { color: #fff; background: rgba(240, 76, 38, 0.1); }
         .main-content { flex: 1; margin-left: 240px; padding: 100px 30px 40px; }
-        .card-white { background: #161c28; padding: 30px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05); }
-        .booking-table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
-        .booking-table th { color: var(--text-muted); font-weight: 600; text-transform: uppercase; font-size: 13px; padding: 10px 20px; border: none; }
-        .booking-table td { background: rgba(255,255,255,0.03); padding: 20px; border: none; vertical-align: middle; }
-        .booking-table td:first-child { border-radius: 10px 0 0 10px; }
-        .booking-table td:last-child { border-radius: 0 10px 10px 0; }
-        .status-badge { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
-        .status-pending { background: rgba(245, 124, 0, 0.1); color: #f57c00; }
-        .status-confirmed { background: rgba(46, 125, 50, 0.1); color: #2e7d32; }
-        .status-completed { background: rgba(139, 92, 246, 0.1); color: #8b5cf6; }
+        .header { position: fixed; top: 0; left: 0; right: 0; height: 70px; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 0 30px; z-index: 1000; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .booking-table { width: 100%; border-collapse: separate; border-spacing: 0 12px; }
+        .booking-table th { color: #fff; font-weight: 800; text-transform: uppercase; font-size: 13px; padding: 15px 20px; border: none; text-shadow: 0 2px 4px rgba(0,0,0,0.8); letter-spacing: 1px; }
+        .booking-table td { background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); padding: 20px; border: 1px solid rgba(255,255,255,0.05); vertical-align: middle; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+        .booking-table td:first-child { border-radius: 15px 0 0 15px; border-right: none; }
+        .booking-table td:last-child { border-radius: 0 15px 15px 0; border-left: none; }
+        .status-badge { padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; border: 1px solid rgba(255,255,255,0.1); }
+        .status-pending { background: rgba(245, 124, 0, 0.2); color: #ffb74d; }
+        .status-confirmed { background: rgba(46, 125, 50, 0.2); color: #81c784; }
+        .status-completed { background: rgba(139, 92, 246, 0.2); color: #a78bfa; }
     </style>
 </head>
-<body>
+<body class="premium-theme">
+    <!-- Sunlight Rays -->
+    <div class="sun-rays-container">
+        <div class="ray ray-1"></div>
+        <div class="ray ray-2"></div>
+        <div class="ray ray-3"></div>
+        <div class="ray ray-4"></div>
+    </div>
     <header class="header">
         <div class="header-logo"><a href="<c:url value='/'/>"><img src="<c:url value='/views/assets/images/logo.png'/>" style="height: 35px;"></a></div>
         <div style="display: flex; align-items: center; gap: 20px;">
-            <a href="<c:url value='/user/dashboard'/>" class="btn" style="background: var(--primary-blue); color: #fff; font-weight: 700; border-radius: 8px; padding: 8px 20px; border: none; font-size: 14px; transition: var(--transition);">
-                Back to Dashboard
-            </a>
             <div style="display: flex; align-items: center; gap: 15px;">
                 <span style="font-weight: 700;">Hi, ${user.name}</span>
                 <c:set var="defaultAvatar" value="https://ui-avatars.com/api/?name=${user.name}&background=f04c26&color=fff" />
@@ -47,24 +46,14 @@
         </div>
     </header>
     <div class="wrapper">
-        <aside class="sidebar">
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="<c:url value='/user/dashboard'/>"><i class="fa fa-th-large"></i> Dashboard</a></li>
-                <li class="nav-item active"><a href="<c:url value='/user/my-bookings'/>"><i class="fa fa-calendar-check-o"></i> My Bookings</a></li>
-                <li class="nav-item"><a href="<c:url value='/user/saved-trips'/>"><i class="fa fa-heart-o"></i> Saved Trips</a></li>
-                <li class="nav-item"><a href="<c:url value='/user/my-reviews'/>"><i class="fa fa-star-o"></i> My Reviews</a></li>
-                <li class="nav-item"><a href="<c:url value='/user/payments'/>"><i class="fa fa-credit-card"></i> Payments</a></li>
-                <li class="nav-item"><a href="<c:url value='/user/messages'/>"><i class="fa fa-envelope-o"></i> Messages</a></li>
-                <li style="margin: 20px 0; border-top: 1px solid rgba(255,255,255,0.1);"></li>
-                <li class="nav-item"><a href="<c:url value='/user/profile'/>"><i class="fa fa-cog"></i> Profile Settings</a></li>
-                <li class="nav-item"><a href="<c:url value='/user/logout'/>"><i class="fa fa-sign-out"></i> Logout</a></li>
-            </ul>
-        </aside>
+        <jsp:include page="user-sidebar.jsp">
+            <jsp:param name="activePage" value="bookings" />
+        </jsp:include>
         <main class="main-content">
             <div class="container-fluid">
                 <div class="mb-4">
-                    <h2 style="font-weight: 800; margin: 0;">My Bookings</h2>
-                    <p style="color: var(--text-muted); margin: 0;">View and manage your travel adventures</p>
+                    <h2 style="font-weight: 800; margin: 0; color: #fff; text-shadow: 0 4px 15px rgba(0,0,0,0.8); font-size: 32px;">My Bookings</h2>
+                    <p style="color: #fff; margin: 0; font-weight: 600; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">View and manage your travel adventures</p>
                 </div>
                 <div class="card-white">
                     <c:choose>
@@ -82,9 +71,9 @@
                                 <tbody>
                                     <c:forEach var="booking" items="${bookings}">
                                         <tr>
-                                            <td style="font-weight: 700;">${booking.trip.title}</td>
-                                            <td>${booking.selectedDate}</td>
-                                            <td style="font-weight: 700; color: var(--primary-blue);">₹${booking.totalPrice}</td>
+                                            <td style="font-weight: 700; font-size: 16px;">${booking.trip.title}</td>
+                                            <td style="font-weight: 600;">${booking.selectedDate}</td>
+                                            <td style="font-weight: 800; color: #ff4d4d; font-size: 18px;">₹${booking.totalPrice}</td>
                                             <td><span class="status-badge ${booking.status == 'Confirmed' ? 'status-confirmed' : booking.status == 'Completed' ? 'status-completed' : 'status-pending'}">${booking.status}</span></td>
                                             <td style="display: flex; gap: 10px;">
                                                 <a href="<c:url value='/user/booking/${booking.id}/chat'/>" class="btn btn-sm" style="border-radius: 8px; background: var(--primary-blue); color: #fff; border: none;">

@@ -9,11 +9,20 @@
     <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
     <style>
-        body { font-family: 'Dosis', sans-serif; background-color: #0f1015; color: #fff; }
+        body { font-family: 'Dosis', sans-serif; background-color: transparent; color: #fff; }
         .admin-layout { display: flex; min-height: 100vh; }
-        .admin-sidebar { width: 260px; background: #000; color: #fff; flex-shrink: 0; box-shadow: 4px 0 15px rgba(0,0,0,0.5); border-right: 1px solid #222; }
+        .admin-sidebar { 
+            width: 260px; 
+            background: rgba(0,0,0,0.4); 
+            backdrop-filter: blur(25px);
+            color: #fff; 
+            flex-shrink: 0; 
+            box-shadow: 4px 0 15px rgba(0,0,0,0.5); 
+            border-right: 1px solid rgba(255,255,255,0.1); 
+        }
         .sidebar-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid #222; }
         .sidebar-header img { max-width: 150px; filter: brightness(0) invert(1); }
         .admin-nav { padding: 20px 0; }
@@ -35,10 +44,11 @@
             gap: 25px;
         }
         .pkg-card {
-            background: #1e1e26;
-            border-radius: 15px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 1px solid #2a2a35;
+            border: 1px solid rgba(255,255,255,0.1);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -72,9 +82,10 @@
         }
         .pkg-title {
             font-size: 18px;
-            font-weight: 700;
+            font-weight: 800;
             color: #fff;
             margin-bottom: 5px;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.8);
         }
         .pkg-destination {
             font-size: 13px;
@@ -177,8 +188,8 @@
         }
         .pkg-footer {
             padding: 15px 20px;
-            background: #1a1a21;
-            border-top: 1px solid #2a2a35;
+            background: transparent;
+            border-top: 1px solid rgba(255,255,255,0.1);
         }
         .view-btn {
             display: block;
@@ -195,7 +206,13 @@
         .view-btn:hover { background: #e60000; color: #fff; text-decoration: none; }
     </style>
 </head>
-<body>
+<body class="premium-theme">
+    <div class="sun-rays-container">
+        <div class="ray ray-1"></div>
+        <div class="ray ray-2"></div>
+        <div class="ray ray-3"></div>
+        <div class="ray ray-4"></div>
+    </div>
     <div class="admin-layout">
         <aside class="admin-sidebar">
             <div class="sidebar-header">
@@ -214,7 +231,7 @@
         </aside>
         <main class="admin-main">
             <header class="admin-header">
-                <h1>All Trip Packages</h1>
+                <h1 style="font-weight: 800; font-size: 36px; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">All Trip Packages</h1>
             </header>
             <div>
                 <c:choose>

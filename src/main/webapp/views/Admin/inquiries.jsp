@@ -9,11 +9,20 @@
     <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
     <style>
-        body { font-family: 'Dosis', sans-serif; background-color: #0f1015; color: #fff; }
+        body { font-family: 'Dosis', sans-serif; background-color: transparent; color: #fff; }
         .admin-layout { display: flex; min-height: 100vh; }
-        .admin-sidebar { width: 260px; background: #000; color: #fff; flex-shrink: 0; box-shadow: 4px 0 15px rgba(0,0,0,0.5); border-right: 1px solid #222; }
+        .admin-sidebar { 
+            width: 260px; 
+            background: rgba(0,0,0,0.4); 
+            backdrop-filter: blur(25px);
+            color: #fff; 
+            flex-shrink: 0; 
+            box-shadow: 4px 0 15px rgba(0,0,0,0.5); 
+            border-right: 1px solid rgba(255,255,255,0.1); 
+        }
         .sidebar-header { padding: 30px 20px; text-align: center; border-bottom: 1px solid #222; }
         .sidebar-header img { max-width: 150px; filter: brightness(0) invert(1); }
         .admin-nav { padding: 20px 0; }
@@ -24,7 +33,14 @@
         .admin-main { flex-grow: 1; padding: 40px; overflow-y: auto; }
         .admin-header { margin-bottom: 40px; }
         .admin-header h1 { font-weight: 700; color: #fff; margin: 0; font-size: 28px; text-transform: uppercase; }
-        .admin-section { background: #1e1e26; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); border: 1px solid #2a2a35; }
+        .admin-section { 
+            background: rgba(0,0,0,0.4); 
+            backdrop-filter: blur(15px);
+            padding: 30px; 
+            border-radius: 24px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+            border: 1px solid rgba(255,255,255,0.1); 
+        }
         
         /* Custom Tabs */
         .nav-tabs { border-bottom: 1px solid #2a2a35; margin-bottom: 30px; }
@@ -34,14 +50,20 @@
             background: transparent !important; color: #ff4d4d !important; border: none !important; border-bottom: 2px solid #ff4d4d !important; 
         }
 
-        .table thead th { background: #2a2a35; color: #888; font-weight: 600; text-transform: uppercase; font-size: 12px; padding: 15px; border: none; }
-        .table tbody td { padding: 15px; vertical-align: middle; border-top: 1px solid #2a2a35; color: #ddd; }
+        .table thead th { background: transparent !important; border-bottom: 2px solid rgba(255,255,255,0.1); color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; font-size: 12px; padding: 15px; border-top: none; text-shadow: 0 2px 4px rgba(0,0,0,0.8); }
+        .table tbody td { padding: 15px; vertical-align: middle; border-top: 1px solid rgba(255,255,255,0.05); color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); font-weight: 600; }
         .status-badge { padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
         .badge-new { background: rgba(33, 150, 243, 0.1); color: #2196f3; }
         .badge-replied { background: rgba(76, 175, 80, 0.1); color: #4caf50; }
     </style>
 </head>
-<body>
+<body class="premium-theme">
+    <div class="sun-rays-container">
+        <div class="ray ray-1"></div>
+        <div class="ray ray-2"></div>
+        <div class="ray ray-3"></div>
+        <div class="ray ray-4"></div>
+    </div>
     <div class="admin-layout">
         <aside class="admin-sidebar">
             <div class="sidebar-header">
@@ -59,7 +81,9 @@
             </nav>
         </aside>
         <main class="admin-main">
-            <header class="admin-header"><h1>Inquiries Management</h1></header>
+            <header class="admin-header">
+                <h1 style="font-weight: 800; font-size: 36px; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">Inquiries Management</h1>
+            </header>
             
             <div class="admin-section">
                 <!-- Tabs Navigation -->

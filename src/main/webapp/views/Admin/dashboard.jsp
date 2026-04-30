@@ -13,35 +13,40 @@
     <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Dosis', sans-serif;
-            background-color: #0f1015; /* Dark black background */
+            background-color: transparent;
             color: #ffffff;
         }
         
         .admin-layout {
             display: flex;
             min-height: 100vh;
+            position: relative;
+            z-index: 10;
         }
         
         /* Sidebar Styling */
         .admin-sidebar {
             width: 260px;
-            background: #000000; /* Pure black sidebar */
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
             color: #fff;
             flex-shrink: 0;
             transition: all 0.3s;
             box-shadow: 4px 0 15px rgba(0,0,0,0.5);
-            border-right: 1px solid #222;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .sidebar-header {
             padding: 30px 20px;
             text-align: center;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .sidebar-header img {
@@ -57,7 +62,7 @@
             padding: 12px 25px;
             display: flex;
             align-items: center;
-            color: #888;
+            color: rgba(255, 255, 255, 0.6);
             text-decoration: none;
             transition: 0.3s;
             font-size: 16px;
@@ -72,14 +77,13 @@
         }
         
         .admin-nav-item:hover, .admin-nav-item.active {
-            background: #1a1a1a;
-            color: #fff;
+            background: rgba(230, 57, 70, 0.15);
+            color: #e63946;
             text-decoration: none;
         }
         
         .admin-nav-item.active {
-            border-left: 4px solid #ff4d4d;
-            background: rgba(255,77,77,0.1);
+            border-left: 4px solid #e63946;
         }
         
         /* Main Content */
@@ -114,16 +118,17 @@
         }
         
         .stat-card {
-            background: #1e1e26; /* Dark card background */
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(15px);
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 20px;
             flex: 1;
             min-width: 200px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
             transition: transform 0.3s;
-            border: 1px solid #2a2a35;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .stat-card:hover {
@@ -149,26 +154,31 @@
         
         .stat-info h3 {
             margin: 0;
-            font-size: 24px;
+            font-size: 32px;
             font-weight: 800;
             color: #ffffff;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
         
         .stat-info p {
             margin: 0;
-            color: #aaaaaa;
+            color: #fff;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
         }
         
         /* Content Sections */
         .admin-section {
-            background: #1e1e26;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(15px);
             padding: 30px;
-            border-radius: 15px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             margin-bottom: 30px;
-            border: 1px solid #2a2a35;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .admin-section-header {
@@ -188,13 +198,16 @@
         }
         
         .table thead th {
-            background: #2a2a35;
-            border-bottom: none;
-            color: #888;
-            font-weight: 600;
+            background: transparent !important;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            color: #fff;
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 1.5px;
             font-size: 12px;
             padding: 15px;
+            border-top: none;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
         
         .table tbody td {
@@ -239,7 +252,14 @@
     </style>
 </head>
 
-<body>
+<body class="premium-theme">
+    <!-- Sunlight Rays -->
+    <div class="sun-rays-container">
+        <div class="ray ray-1"></div>
+        <div class="ray ray-2"></div>
+        <div class="ray ray-3"></div>
+        <div class="ray ray-4"></div>
+    </div>
     <div class="admin-layout">
         <!-- Sidebar -->
         <aside class="admin-sidebar">
@@ -275,7 +295,7 @@
         <!-- Main Content -->
         <main class="admin-main">
             <header class="admin-header">
-                <h1>Dashboard Overview</h1>
+                <h1 style="font-weight: 800; font-size: 36px; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">Dashboard Overview</h1>
                 <div class="admin-user">
                     <span style="color: #888; margin-right: 10px;">Welcome, <strong>System Admin</strong></span>
                     <img src="https://ui-avatars.com/api/?name=Admin&background=ff4d4d&color=fff" alt="Admin" style="width: 40px; height: 40px; border-radius: 50%;">

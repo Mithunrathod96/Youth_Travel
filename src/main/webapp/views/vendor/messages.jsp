@@ -9,24 +9,25 @@
     <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
     <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+    <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
     <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
     <style>
         :root { --primary-blue: #f04c26; --text-muted: #7e8c9a; --transition: all 0.3s ease; }
-        body.yt-dark { background: #0b0f18; color: #fff; font-family: 'Dosis', sans-serif; margin: 0; padding: 0; overflow: hidden; height: 100vh; }
+        body.yt-dark { background: transparent; color: #fff; font-family: 'Dosis', sans-serif; margin: 0; padding: 0; overflow: hidden; height: 100vh; }
 
         /* Top Header */
-        .main-content { padding: 0 !important; display: flex; flex-direction: column; }
-        .page-header { padding: 25px 40px; border-bottom: 1px solid rgba(255,255,255,0.05); background: #161c28; display: flex; align-items: center; justify-content: space-between; }
-        .page-header h2 { margin: 0; font-weight: 800; font-size: 24px; }
+        .main-content { padding: 0 !important; display: flex; flex-direction: column; background: transparent; }
+        .page-header { padding: 25px 40px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; box-shadow: 0 4px 20px rgba(0,0,0,0.2); }
+        .page-header h2 { margin: 0; font-weight: 800; font-size: 24px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
 
         /* Chat UI Container */
         .chat-container { display: flex; flex-grow: 1; overflow: hidden; }
 
         /* Left Inbox List */
-        .inbox-list { width: 350px; background: rgba(255,255,255,0.02); border-right: 1px solid rgba(255,255,255,0.05); overflow-y: auto; display: flex; flex-direction: column; }
+        .inbox-list { width: 350px; background: rgba(0,0,0,0.1); backdrop-filter: blur(15px); border-right: 1px solid rgba(255,255,255,0.1); overflow-y: auto; display: flex; flex-direction: column; }
         .inbox-search { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .inbox-search input { width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 12px 20px; color: #fff; outline: none; transition: var(--transition); }
-        .inbox-search input:focus { border-color: var(--primary-blue); }
+        .inbox-search input { width: 100%; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); border-radius: 30px; padding: 12px 20px; color: #fff; outline: none; transition: var(--transition); backdrop-filter: blur(5px); }
+        .inbox-search input:focus { border-color: var(--primary-blue); background: rgba(0,0,0,0.6); box-shadow: 0 0 15px rgba(240, 76, 38, 0.2); }
         
         .inbox-item { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.03); cursor: pointer; transition: 0.2s; display: flex; align-items: center; gap: 15px; }
         .inbox-item:hover { background: rgba(255,255,255,0.05); }
@@ -34,37 +35,43 @@
         
         .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
         .inbox-details { flex: 1; overflow: hidden; }
-        .inbox-name { font-weight: 700; font-size: 16px; margin-bottom: 3px; display: flex; justify-content: space-between; align-items: center; color: #fff; }
-        .inbox-preview { font-size: 13px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .inbox-name { font-weight: 800; font-size: 16px; margin-bottom: 3px; display: flex; justify-content: space-between; align-items: center; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+        .inbox-preview { font-size: 13px; color: rgba(255,255,255,0.7); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 500; }
         
         /* Right Chat Area */
-        .chat-view { flex-grow: 1; display: flex; flex-direction: column; background: #0b0f18; }
+        .chat-view { flex-grow: 1; display: flex; flex-direction: column; background: rgba(0,0,0,0.05); backdrop-filter: blur(5px); }
         
-        .chat-header { padding: 20px 30px; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(255,255,255,0.02); display: flex; align-items: center; justify-content: space-between; }
+        .chat-header { padding: 20px 30px; border-bottom: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; }
         
         .chat-messages { flex-grow: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px; }
         
-        .msg-bubble { max-width: 70%; padding: 15px 20px; border-radius: 20px; font-size: 15px; line-height: 1.5; position: relative; }
-        .msg-time { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 5px; display: block; }
+        .msg-bubble { max-width: 70%; padding: 15px 22px; border-radius: 20px; font-size: 16px; line-height: 1.5; position: relative; font-weight: 600; text-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+        .msg-time { font-size: 11px; color: rgba(255,255,255,0.8); margin-top: 6px; display: block; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
         
         /* Bubble from Vendor (Me) */
-        .msg-sent { align-self: flex-end; background: var(--primary-blue); color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 5px 15px rgba(240, 76, 38, 0.2); }
-        .msg-sent .msg-time { text-align: right; color: rgba(255,255,255,0.8); }
+        .msg-sent { align-self: flex-end; background: #ff4d4d; color: #fff; border-bottom-right-radius: 4px; box-shadow: 0 8px 25px rgba(255, 77, 77, 0.3); }
+        .msg-sent .msg-time { text-align: right; color: rgba(255,255,255,0.9); }
         
         /* Bubble from Customer (Them) */
-        .msg-received { align-self: flex-start; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-bottom-left-radius: 4px; }
+        .msg-received { align-self: flex-start; background: rgba(0,0,0,0.5); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-bottom-left-radius: 4px; color: #fff; }
         
         /* Input Area */
-        .chat-input-area { padding: 20px 30px; border-top: 1px solid rgba(255,255,255,0.05); background: #161c28; }
+        .chat-input-area { padding: 20px 30px; border-top: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.3); backdrop-filter: blur(10px); }
         .chat-form { display: flex; gap: 15px; align-items: center; }
-        .chat-input { flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 30px; padding: 15px 25px; color: #fff; outline: none; transition: var(--transition); }
-        .chat-input:focus { border-color: var(--primary-blue); background: rgba(255,255,255,0.08); }
+        .chat-input { flex: 1; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.2); border-radius: 30px; padding: 15px 25px; color: #fff; outline: none; transition: var(--transition); backdrop-filter: blur(5px); }
+        .chat-input:focus { border-color: var(--primary-blue); background: rgba(0,0,0,0.6); box-shadow: 0 0 15px rgba(240, 76, 38, 0.2); }
         .btn-send { background: var(--primary-blue); color: #fff; border: none; width: 50px; height: 50px; border-radius: 50%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: var(--transition); box-shadow: 0 5px 15px rgba(240, 76, 38, 0.3); flex-shrink: 0; }
         .btn-send:hover { transform: scale(1.05); }
     </style>
 </head>
 
-<body class="yt-dark">
+<body class="yt-dark premium-theme">
+    <div class="sun-rays-container">
+        <div class="ray ray-1"></div>
+        <div class="ray ray-2"></div>
+        <div class="ray ray-3"></div>
+        <div class="ray ray-4"></div>
+    </div>
     <jsp:include page="vendor-sidebar.jsp">
         <jsp:param name="activePage" value="messages" />
     </jsp:include>

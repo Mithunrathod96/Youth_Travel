@@ -2,17 +2,17 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <style>
     :root {
-        --primary-color: #f04c26;
-        --primary-gradient: linear-gradient(135deg, #f04c26 0%, #d84422 100%);
-        --card-border: rgba(255, 255, 255, 0.05);
+        --primary-color: #e63946;
+        --primary-gradient: linear-gradient(135deg, #e63946 0%, #c1121f 100%);
+        --card-border: rgba(255, 255, 255, 0.1);
         --text-muted: rgba(255, 255, 255, 0.6);
         --danger: #ef4444;
     }
 
     .sidebar {
-        background: rgba(11, 15, 24, 0.95);
-        backdrop-filter: blur(20px);
-        border-right: 1px solid var(--card-border);
+        background: rgba(0,0,0,0.3);
+        backdrop-filter: blur(25px);
+        border-right: 1px solid rgba(255,255,255,0.1);
         height: 100vh;
         position: fixed;
         left: 0;
@@ -22,6 +22,7 @@
         z-index: 1000;
         transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         overflow-y: auto;
+        box-shadow: 10px 0 30px rgba(0,0,0,0.3);
     }
 
     /* Hide scrollbar for sidebar */
@@ -52,17 +53,18 @@
     }
 
     .nav-sidebar a {
-        color: var(--text-muted);
+        color: rgba(255,255,255,0.7);
         display: flex;
         align-items: center;
         padding: 14px 20px;
         border-radius: 14px;
-        font-weight: 600;
+        font-weight: 700;
         font-size: 15px;
         transition: all 0.3s ease;
         text-decoration: none;
         position: relative;
         overflow: hidden;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
     .nav-sidebar a i {
@@ -93,7 +95,8 @@
 
     .nav-sidebar a.active {
         color: #fff;
-        box-shadow: 0 10px 20px rgba(240, 76, 38, 0.2);
+        box-shadow: 0 10px 20px rgba(240, 76, 38, 0.3);
+        text-shadow: 0 2px 10px rgba(255,255,255,0.3);
     }
     
     .nav-sidebar a.active::before { opacity: 1; }

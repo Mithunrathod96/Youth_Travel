@@ -12,29 +12,33 @@
                 <link rel="stylesheet" href="<c:url value='/views/assets/css/bootstrap.min.css'/>">
                 <link rel="stylesheet" href="<c:url value='/views/assets/css/style.css'/>">
                 <link rel="stylesheet" href="<c:url value='/views/assets/css/font-awesome.min.css'/>">
+                <link rel="stylesheet" href="<c:url value='/views/assets/css/premium-dashboard.css'/>">
                 <link href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" rel="stylesheet">
                 <style>
                     body.yt-dark {
-                        background: #0b0f18;
+                        background: transparent;
                         color: #fff;
                         font-family: 'Dosis', sans-serif;
                     }
 
                     .form-card {
-                        background: rgba(255, 255, 255, 0.03);
-                        border: 1px solid rgba(255, 255, 255, 0.08);
+                        background: rgba(0,0,0,0.3);
+                        backdrop-filter: blur(15px);
+                        border: 1px solid rgba(255, 255, 255, 0.1);
                         border-radius: 24px;
                         padding: 40px;
+                        box-shadow: 0 15px 35px rgba(0,0,0,0.4);
                     }
 
                     .section-title {
-                        font-size: 20px;
+                        font-size: 24px;
                         font-weight: 800;
-                        color: #f04c26;
+                        color: #fff;
                         margin-bottom: 35px;
                         display: flex;
                         align-items: center;
                         gap: 12px;
+                        text-shadow: 0 4px 15px rgba(0,0,0,0.8);
                     }
 
                     .section-title .badge {
@@ -50,21 +54,23 @@
                     }
 
                     .form-group label {
-                        color: rgba(255, 255, 255, 0.6);
-                        font-weight: 600;
-                        font-size: 14px;
-                        margin-bottom: 10px;
+                        color: #fff;
+                        font-weight: 700;
+                        font-size: 15px;
+                        margin-bottom: 12px;
                         display: block;
+                        text-shadow: 0 2px 5px rgba(0,0,0,0.8);
                     }
 
                     .form-control {
-                        background: rgba(255, 255, 255, 0.05);
-                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        background: rgba(0,0,0,0.4);
+                        border: 1px solid rgba(255, 255, 255, 0.2);
                         border-radius: 12px;
                         color: #fff;
                         height: 50px;
                         padding: 0 16px;
                         transition: all 0.2s;
+                        backdrop-filter: blur(5px);
                     }
 
                     .form-control:focus {
@@ -104,11 +110,17 @@
 
                     .custom-checkbox {
                         position: relative;
-                        display: flex;
-                        align-items: center;
-                        gap: 10px;
+                        padding-left: 35px;
+                        margin-bottom: 12px;
                         cursor: pointer;
+                        font-size: 14px;
+                        font-weight: 600;
+                        color: #ffffff !important;
                         user-select: none;
+                        display: block;
+                        transition: all 0.2s;
+                        line-height: 20px;
+                        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
                     }
 
                     .custom-checkbox input {
@@ -120,37 +132,66 @@
                     }
 
                     .checkmark {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
                         height: 20px;
                         width: 20px;
-                        background-color: rgba(255, 255, 255, 0.08);
-                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        background-color: rgba(255, 255, 255, 0.1);
+                        border: 1px solid rgba(255, 255, 255, 0.2);
                         border-radius: 6px;
+                        transition: all 0.2s;
                     }
 
-                    .custom-checkbox:hover input~.checkmark {
-                        background-color: rgba(255, 255, 255, 0.12);
+                    .custom-checkbox:hover .checkmark {
+                        background-color: rgba(255, 255, 255, 0.2);
+                        border-color: #f04c26;
                     }
 
-                    .custom-checkbox input:checked~.checkmark {
+                    .custom-checkbox input:checked ~ .checkmark {
                         background-color: #f04c26;
                         border-color: #f04c26;
+                        box-shadow: 0 0 10px rgba(240, 76, 38, 0.3);
                     }
 
                     .checkmark:after {
                         content: "";
                         position: absolute;
                         display: none;
+                    }
+
+                    .custom-checkbox input:checked ~ .checkmark:after {
+                        display: block;
+                    }
+
+                    .custom-checkbox .checkmark:after {
                         left: 7px;
                         top: 3px;
-                        width: 6px;
-                        height: 11px;
+                        width: 5px;
+                        height: 10px;
                         border: solid white;
                         border-width: 0 2px 2px 0;
                         transform: rotate(45deg);
                     }
 
-                    .custom-checkbox input:checked~.checkmark:after {
-                        display: block;
+                    .custom-checkbox .checkbox-text {
+                        color: #ffffff !important;
+                        font-weight: 600 !important;
+                        display: inline-block;
+                        vertical-align: middle;
+                        text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+                    }
+
+                    .dropdown-menu {
+                        background: #1a1f2b !important;
+                        border: 1px solid rgba(255,255,255,0.1) !important;
+                        box-shadow: 0 15px 35px rgba(0,0,0,0.5) !important;
+                        padding: 15px !important;
+                        min-width: 280px !important;
+                    }
+
+                    .dropdown-menu label:hover {
+                        color: #f04c26 !important;
                     }
 
                     .btn-submit {
@@ -182,13 +223,15 @@
                     }
 
                     .itinerary-day {
-                        background: rgba(255, 255, 255, 0.02);
-                        border: 1px solid rgba(255, 255, 255, 0.05);
+                        background: rgba(0,0,0,0.3);
+                        backdrop-filter: blur(10px);
+                        border: 1px solid rgba(255, 255, 255, 0.1);
                         border-radius: 16px;
-                        padding: 25px;
-                        margin-bottom: 20px;
+                        padding: 30px;
+                        margin-bottom: 25px;
                         position: relative;
                         animation: slideDown 0.3s ease-out;
+                        box-shadow: 0 10px 25px rgba(0,0,0,0.2);
                     }
 
                     /* Utility Classes */
@@ -506,7 +549,13 @@
                 </style>
             </head>
 
-            <body class="yt-dark">
+            <body class="yt-dark premium-theme">
+            <div class="sun-rays-container">
+                <div class="ray ray-1"></div>
+                <div class="ray ray-2"></div>
+                <div class="ray ray-3"></div>
+                <div class="ray ray-4"></div>
+            </div>
                     <jsp:include page="vendor-sidebar.jsp">
         <jsp:param name="activePage" value="tours" />
     </jsp:include>
@@ -580,76 +629,91 @@
                                                     style="background: #1a1f2b; min-width: 250px;">
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Solo"
+                                                            ${fn:contains(trip.travelerCategory, 'Solo') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Solo Travelers</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Group"
+                                                            ${fn:contains(trip.travelerCategory, 'Group') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Group / Friends</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Corporate"
+                                                            ${fn:contains(trip.travelerCategory, 'Corporate') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Corporate / Team</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Adventure"
+                                                            ${fn:contains(trip.travelerCategory, 'Adventure') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Adventure</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Bike Riding"
+                                                            ${fn:contains(trip.travelerCategory, 'Bike Riding') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Bike Riding</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Nature Exploration"
+                                                            ${fn:contains(trip.travelerCategory, 'Nature Exploration') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Nature Exploration</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Water Activities"
+                                                            ${fn:contains(trip.travelerCategory, 'Water Activities') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Water Activities</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Workation"
+                                                            ${fn:contains(trip.travelerCategory, 'Workation') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Workation / Digital Nomad</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Festivals"
+                                                            ${fn:contains(trip.travelerCategory, 'Festivals') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Festivals & Events</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Volunteering"
+                                                            ${fn:contains(trip.travelerCategory, 'Volunteering') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Volunteering</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Nightlife"
+                                                            ${fn:contains(trip.travelerCategory, 'Nightlife') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Nightlife & Social</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Content Creation"
+                                                            ${fn:contains(trip.travelerCategory, 'Content Creation') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Content Creation</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Wellness"
+                                                            ${fn:contains(trip.travelerCategory, 'Wellness') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Wellness & Detox</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             name="travelerCategories" value="Budget Backpacking"
+                                                            ${fn:contains(trip.travelerCategory, 'Budget Backpacking') ? 'checked' : ''}
                                                             onchange="updateSubCategories()"><span
                                                             class="checkmark"></span>
                                                         Budget Backpacking</label>
                                                     <label class="custom-checkbox mb-2 d-flex"><input type="checkbox"
                                                             id="catOthersCheck" name="travelerCategories" value="Others"
+                                                            ${fn:contains(trip.travelerCategory, 'Others') ? 'checked' : ''}
                                                             onchange="toggleOtherInput('catOthersCheck', 'catOtherInputCont'); updateSubCategories();"><span
                                                             class="checkmark"></span> Others</label>
                                                 </div>
@@ -911,24 +975,30 @@
                                             <div class="row g-2">
                                                 <div class="col-6">
                                                     <label class="custom-checkbox small mb-2"><input type="checkbox"
-                                                            class="stay-amenity" value="24/7 Security"><span
+                                                            class="stay-amenity" value="24/7 Security"
+                                                            ${fn:contains(trip.stayAmenities, '24/7 Security') ? 'checked' : ''}><span
                                                             class="checkmark"></span> 24/7 Security</label>
                                                     <label class="custom-checkbox small mb-2"><input type="checkbox"
-                                                            class="stay-amenity" value="CCTV Surveillance"><span
+                                                            class="stay-amenity" value="CCTV Surveillance"
+                                                            ${fn:contains(trip.stayAmenities, 'CCTV Surveillance') ? 'checked' : ''}><span
                                                             class="checkmark"></span> CCTV</label>
                                                     <label class="custom-checkbox small mb-2"><input type="checkbox"
-                                                            class="stay-amenity" value="First Aid Kit"><span
+                                                            class="stay-amenity" value="First Aid Kit"
+                                                            ${fn:contains(trip.stayAmenities, 'First Aid Kit') ? 'checked' : ''}><span
                                                             class="checkmark"></span> First Aid Kit</label>
                                                 </div>
                                                 <div class="col-6">
                                                     <label class="custom-checkbox small mb-2"><input type="checkbox"
-                                                            class="stay-amenity" value="Fire Safety"><span
+                                                            class="stay-amenity" value="Fire Safety"
+                                                            ${fn:contains(trip.stayAmenities, 'Fire Safety') ? 'checked' : ''}><span
                                                             class="checkmark"></span> Fire Safety</label>
                                                     <label class="custom-checkbox small mb-2"><input type="checkbox"
-                                                            class="stay-amenity" value="Women-Friendly"><span
+                                                            class="stay-amenity" value="Women-Friendly"
+                                                            ${fn:contains(trip.stayAmenities, 'Women-Friendly') ? 'checked' : ''}><span
                                                             class="checkmark"></span> Women-Friendly</label>
                                                     <label class="custom-checkbox small mb-2"><input type="checkbox"
-                                                            class="stay-amenity" value="Family-Friendly"><span
+                                                            class="stay-amenity" value="Family-Friendly"
+                                                            ${fn:contains(trip.stayAmenities, 'Family-Friendly') ? 'checked' : ''}><span
                                                             class="checkmark"></span> Family-Friendly</label>
                                                 </div>
                                             </div>
@@ -1416,6 +1486,33 @@
                         updateStayTypes();
                         updateTransportTypes();
                         updateSubCategories(true);
+
+                        // Hydrate Itinerary
+                        try {
+                            const itinVal = document.getElementById('itineraryJson').value;
+                            if (itinVal) {
+                                const days = JSON.parse(itinVal);
+                                days.forEach((d, i) => addDayItem(d, i + 1));
+                            }
+                        } catch (e) { console.error("Itinerary hydration error", e); }
+
+                        // Hydrate Pickups
+                        try {
+                            const pickupVal = document.getElementById('pickupPointsJson').value;
+                            if (pickupVal) {
+                                const pickups = JSON.parse(pickupVal);
+                                pickups.forEach(p => addCustomPickup(p.name, p.time, p.type));
+                            }
+                        } catch (e) { console.error("Pickups hydration error", e); }
+
+                        // Hydrate Schedules
+                        try {
+                            const schedVal = document.getElementById('schedulesJson').value;
+                            if (schedVal && document.getElementById('scheduleModeInput').value === 'specific') {
+                                const scheds = JSON.parse(schedVal);
+                                scheds.forEach(s => addOccurrence(s));
+                            }
+                        } catch (e) { console.error("Schedules hydration error", e); }
                     });
 
                     function updateSubCategories(isFirst = false) {
@@ -1446,7 +1543,7 @@
                         const savedSubs = rawSubs ? rawSubs.split(', ') : [];
                         allSubs.forEach(s => {
                             const isChecked = isFirst && savedSubs.includes(s) ? 'checked' : '';
-                            html += `<label class="custom-checkbox"><input type="checkbox" name="travelerSubCategories" value="${s}" ${isChecked} onchange="checkSubOther()"><span class="checkmark"></span> ${s}</label>`;
+                            html += '<label class="custom-checkbox"><input type="checkbox" name="travelerSubCategories" value="' + s + '" ' + isChecked + ' onchange="checkSubOther()"><span class="checkmark"></span> <span class="checkbox-text">' + s + '</span></label>';
                         });
                         list.innerHTML = html;
 
